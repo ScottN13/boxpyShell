@@ -1,2 +1,2 @@
-# my-python-project-hub
+# pyprojects-cmd
 my python projects hub
