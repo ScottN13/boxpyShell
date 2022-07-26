@@ -1,4 +1,6 @@
 import sys
+import time
+from extShellData import *
 
 printStuffpc = True
 printStuff = True
@@ -19,6 +21,7 @@ while run == True:
     def passgenInit():
         #from passgen import *
         print("init pypassgen")
+        print("hpg for a list of commands")
 
     if printStuff == True:
         print("Hello There!")
@@ -33,7 +36,7 @@ while run == True:
     if command == "help":
         print("!!Every command is case sensitive!!")
         print("'source' - prints github links")
-        print("'quit' - ends the command line")
+        print("'quit' or 'exit' - ends the command line")
         continue
 
     elif command == "source":
@@ -45,10 +48,18 @@ while run == True:
     elif command == "pypassgenInit":
         passgenInit()
 
-    elif command == "quit":
+    elif command == "shellBasic":
+        print("Python shell but different. please input a command")
+        cmmd = input()
+        if cmmd == "createScreen1":
+            pythonBasic.screens.createScreen()
+    
+
+    elif command == "quit" or command == "exit":
         print("exited")
+        time.sleep(3)
         sys.exit()
 
-    elif command != "help" or "source" or "quit" or "pypassgenInit" or "pyclockInit":
+    elif command != cmdList:
         print("unknown command.")
         continue
