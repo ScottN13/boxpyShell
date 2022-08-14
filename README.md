@@ -9,6 +9,9 @@ boxpyShell (originally called "pyprojects-cmd") is a shell i made as a project o
 
 will include pyclock and pypassgen (once its finished)
 
+## update 14/08/22
+new commands such as math, fun and an clearscreen
+
 ## update 26/07/22
 
 new commands, more more.
