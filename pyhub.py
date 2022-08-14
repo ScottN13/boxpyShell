@@ -49,11 +49,31 @@ while run == True:
         passgenInit()
 
     elif command == "shellBasic":
-        print("Python shell but different. please input a command")
+        print("Please input a command")
         cmmd = input()
         if cmmd == "createScreen1":
             pythonBasic.screens.createScreen()
+
+    elif command == "echo":
+        txtE = input()
+        for i in range(5):
+            print("")
+        extFunc.funct.echo(txtE)
+
+    elif command == "clearscreen":
+        spamClear()
     
+    elif command == "shellVer":
+        extFunc.funct.shellVer()
+        
+    elif command == "MathAdd":
+        extFunc.math.add()
+
+    elif command == "MathSubt":
+        extFunc.math.subtract()
+    
+    elif command == "helloMe":
+        extFunc.fun.helloUser()
 
     elif command == "quit" or command == "exit":
         print("exited")
