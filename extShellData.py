@@ -16,13 +16,14 @@ def spamClear():
 class pythonBasic:
     class functions:
         def length():
+            print("Count the letters in a word!")
             string = input()
             len(string)
         def identify():
             string = input()
             id(string)
     class screens:
-        print("close to continue your pyhub task")
+        print("close to continue your shell task")
         def createScreen():
             run = TRUE
             while run:

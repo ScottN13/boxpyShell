@@ -75,10 +75,17 @@ while run == True:
     elif command == "helloMe":
         extFunc.fun.helloUser()
 
+    elif command == "8Ball":
+        extFunc.fun.eightBall()
+
+    elif command == "YesOrNo":
+        extFunc.fun.ynGame()
+
     elif command == "quit" or command == "exit":
         print("exited")
         time.sleep(3)
         sys.exit()
+
 
     elif command != cmdList:
         print("unknown command.")
