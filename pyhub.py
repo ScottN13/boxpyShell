@@ -7,6 +7,7 @@ printStuff = True
 run = True
 while run == True:
 
+    """
     def pyclockInit():
        # from pyclock import *
         if printStuffpc == True:
@@ -31,6 +32,8 @@ while run == True:
         printStuff = False
     print("Please type a command.")
 
+    """
+
     command = input()
 
     if command == "help":
@@ -41,12 +44,6 @@ while run == True:
 
     elif command == "source":
         print("error: links not found")
-
-    elif command == "pyclockInit":
-        pyclockInit()
-
-    elif command == "pypassgenInit":
-        passgenInit()
 
     elif command == "shellBasic":
         print("Please input a command")

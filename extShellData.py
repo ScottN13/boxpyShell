@@ -6,6 +6,8 @@ import random
 cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit"]
 scrCMDlist = ["t","ti","help","tc","pc","back"]
 
+print("extShell data init")
+
 #data
 ver = 0.1
 
@@ -60,6 +62,8 @@ class extFunc:
             print()
             print("boxpyshell created by ValkTheBoxman")
             print("ver:",ver)
+            print()
+            print("（＾ω＾）")
             print()
 
     class math:
