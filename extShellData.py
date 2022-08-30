@@ -1,6 +1,8 @@
 import os
 from tkinter import *
 import random
+import time
+import sys
 
 # cmd items not worth putting there
 cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit"]
@@ -15,6 +17,30 @@ def spamClear():
     for i in range(100):
         print("")
 
+class animlib:
+    def loadingAnim(x,y) -> None:
+
+        top = "|"
+        right = ">"
+        left = "<"
+
+        if x == "load":
+            state = "loading...  "
+        elif x == "exit":
+            state = "exiting... "
+
+        for i in range(y):
+            print(state,top, end="\r")
+            time.sleep(0.5)
+            print(state,left, end="\r")
+            time.sleep(0.5)
+            print(state,top, end="\r")
+            time.sleep(0.5)
+            print(state,right, end="\r")
+            time.sleep(0.5)
+
+
+
 class pythonBasic:
     class functions:
         def length():
@@ -25,10 +51,10 @@ class pythonBasic:
             string = input()
             id(string)
     class screens:
-        print("close to continue your shell task")
         def createScreen():
             run = TRUE
             while run:
+                print("close to continue your shell task")
                 #self explanatory
                 print("Choose what should pop up? (text,image,etc.)")
                 inputWish = input()

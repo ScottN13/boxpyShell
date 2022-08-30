@@ -5,6 +5,9 @@ from extShellData import *
 printStuffpc = True
 printStuff = True
 run = True
+
+animlib.loadingAnim("load",5)
+
 while run == True:
 
     """
@@ -18,12 +21,12 @@ while run == True:
             printStuffpc = False
         print("please type a command.")
      
-
     def passgenInit():
         #from passgen import *
         print("init pypassgen")
         print("hpg for a list of commands")
 
+    """    
     if printStuff == True:
         print("Hello There!")
         print("Here are the list of avaiable projects on here!")
@@ -32,14 +35,13 @@ while run == True:
         printStuff = False
     print("Please type a command.")
 
-    """
 
     command = input()
 
     if command == "help":
-        print("!!Every command is case sensitive!!")
-        print("'source' - prints github links")
-        print("'quit' or 'exit' - ends the command line")
+        file_path = 'C:/Users/Lenovo/Desktop/Coding/github projects/boxpyShell/help.txt'
+        with open(file_path) as file:
+            print(file.read())
         continue
 
     elif command == "source":
@@ -52,6 +54,7 @@ while run == True:
             pythonBasic.screens.createScreen()
 
     elif command == "echo":
+        print("Please type something to echo.")
         txtE = input()
         for i in range(5):
             print("")
@@ -79,8 +82,8 @@ while run == True:
         extFunc.fun.ynGame()
 
     elif command == "quit" or command == "exit":
-        print("exited")
-        time.sleep(3)
+        animlib.loadingAnim("exit",5)
+        print("terminated main task. exit")
         sys.exit()
 
 
