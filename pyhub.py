@@ -39,15 +39,30 @@ while run == True:
     command = input()
 
     if command == "help":
-        file_path = 'C:/Users/Lenovo/Desktop/Coding/github projects/boxpyShell/help.txt'
-        with open(file_path) as file:
-            print(file.read())
+
+        typeHelp = input()
+
+        if typeHelp == "basic":
+            file_path = 'data/help.txt'
+            with open(file_path) as file:
+                print(file.read())
+
+        elif typeHelp == "ext1":
+            file_path = 'data/hpc.txt'
+            with open(file_path) as file:
+                print(file.read())
+
+        elif typeHelp == "ext2":
+            file_path = 'data/hpg.txt'
+            with open(file_path) as file:
+                print(file.read())
+
         continue
 
     elif command == "source":
         print("error: links not found")
 
-    elif command == "shellBasic":
+    elif command == "screenCreate":
         print("Please input a command")
         cmmd = input()
         if cmmd == "createScreen1":

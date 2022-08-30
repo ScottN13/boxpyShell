@@ -87,10 +87,11 @@ class extFunc:
         def shellVer():
             print()
             print("boxpyshell created by ValkTheBoxman")
-            print("ver:",ver)
+            print("ver:",ver,"","Build : main")
             print()
             print("（＾ω＾）")
             print()
+            
 
     class math:
         def add():

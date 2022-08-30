@@ -1,0 +1,6 @@
+
+The List of Commands
+########## PAGE 2 - PYCLOCK ###########
+1. debugMenu - Opens up the "Function Executer Menu" aka the debug menu
+2. quit - exit - Terminates the task.
+########## PAGE 2/3 ############

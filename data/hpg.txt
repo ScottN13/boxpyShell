@@ -1,0 +1,7 @@
+
+The List of Commands
+########## PAGE 3 - PASSGEN ###########
+
+Sorry! At the moment, PASSGEN is not written/implemented. See github (type "source" in shell!)!
+
+########## PAGE 3/3 ############

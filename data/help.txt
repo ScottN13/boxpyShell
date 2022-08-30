@@ -1,0 +1,13 @@
+
+The List of Commands
+########## PAGE 1 - NORMAL ###########
+1. source - Direct link to Github
+2. quit - exit - Terminates the task.
+3. echo - Prints out your Message
+4. screenCreate - Create screens. (semi-bugged, unfinished)
+5. clearscreen - Clears the screen.
+6. shellVer - displays the version/build of the shell.
+7. Math (MathAdd, MathSubt) - Calculator (unfinished)
+8. Fun (helloMe, 8Ball, YesOrNo) - Some games.
+
+########## PAGE 1/3 ############
