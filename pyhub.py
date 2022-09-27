@@ -29,8 +29,7 @@ while run == True:
     """    
     if printStuff == True:
         print("Hello There!")
-        print("Here are the list of avaiable projects on here!")
-        print("pyclock-library, pypassgen")
+        print("# Reminder!! Every command is CaSe SeNsItIvE")
         print("Type 'help' for a list of avaiable commands")
         printStuff = False
     print("Please type a command.")
@@ -39,7 +38,7 @@ while run == True:
     command = input()
 
     if command == "help":
-
+        print("Select which type of help to display: basic, ext1, ext2")
         typeHelp = input()
 
         if typeHelp == "basic":
@@ -58,6 +57,15 @@ while run == True:
                 print(file.read())
 
         continue
+
+    elif command == "readEX":
+        file_pathEX = 'data/helloworld.txt'
+        print('This is just a demonstration of the reading ability of boxpyshell')
+        print("Please wait...r")
+        animlib.loadingAnim("load",5)
+        spamClear()
+        with open(file_pathEX) as file:
+            print(file.read())           
 
     elif command == "source":
         print("error: links not found")
@@ -96,11 +104,13 @@ while run == True:
     elif command == "YesOrNo":
         extFunc.fun.ynGame()
 
+    #elif command == "createFile":
+     #   os.
+
     elif command == "quit" or command == "exit":
         animlib.loadingAnim("exit",5)
         print("terminated main task. exit")
         sys.exit()
-
 
     elif command != cmdList:
         print("unknown command.")
