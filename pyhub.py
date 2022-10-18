@@ -1,6 +1,8 @@
 import sys
 import time
 from extShellData import *
+from nbdpy import *
+
 
 printStuffpc = True
 printStuff = True
@@ -103,6 +105,9 @@ while run == True:
 
     elif command == "YesOrNo":
         extFunc.fun.ynGame()
+
+    elif command == "nbdpy":
+        nbDisplay.startDisplay()
 
     #elif command == "createFile":
      #   os.

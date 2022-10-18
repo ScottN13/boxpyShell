@@ -5,6 +5,16 @@
 
 ![maintained - yes](https://img.shields.io/badge/maintained-yes-blue) [![Made with Python](https://img.shields.io/badge/Python->=3.6-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage") 
 
-boxpyShell (originally called "pyprojects-cmd") is a shell i made as a project of mine even tho there are terminals out there which do the same stuff.
+boxpyShell is a shell i made.
+It has both CUI and GUI (as of update 1.5.2022 (the .5 is the build, i lost count)).
 
-will include pyclock and pypassgen (once its finished)
+# CUI
+Every command is CaSe SeNsItIvE!
+Help commands are written in txt files! It has games, tools and a screen creator!
+
+# GUIe
+## New as of 1.5.2022!
+
+You can easily exit without having to wait! (KeyboardInterrupt is still an option)
+Clear the shell window (Is this the "Adam Task" from TempleOs? (massive inspiration from there!!))
+Print Hello World! and tell (bad) jokes!

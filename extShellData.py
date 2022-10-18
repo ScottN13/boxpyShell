@@ -5,7 +5,7 @@ import time
 import sys
 
 # cmd items not worth putting there
-cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit"]
+cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy"]
 scrCMDlist = ["t","ti","help","tc","pc","back"]
 
 print("extShell data init")
