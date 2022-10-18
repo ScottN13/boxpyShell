@@ -12,7 +12,7 @@ It has both CUI and GUI (as of update 1.5.2022 (the .5 is the build, i lost coun
 Every command is CaSe SeNsItIvE!
 Help commands are written in txt files! It has games, tools and a screen creator!
 
-# GUIe
+# GUI
 ## New as of 1.5.2022!
 
 You can easily exit without having to wait! (KeyboardInterrupt is still an option)
