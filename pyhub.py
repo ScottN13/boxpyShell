@@ -109,6 +109,9 @@ while run == True:
     elif command == "nbdpy":
         nbDisplay.startDisplay()
 
+    elif command == "MegaExit":
+        sys.exit("M E G A E X I T")
+
     #elif command == "createFile":
      #   os.
 

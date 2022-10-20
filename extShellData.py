@@ -11,8 +11,8 @@ scrCMDlist = ["t","ti","help","tc","pc","back"]
 print("extShell data init")
 
 #data
-ver = 0.1
-
+ver = "1.5.10.22" # The first two digits stand for build number, the 2nd two stand for month and year.
+ 
 def spamClear():
     for i in range(100):
         print("")
