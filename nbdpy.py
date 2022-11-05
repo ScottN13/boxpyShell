@@ -38,6 +38,15 @@ class nbDisplay:
         def megaExit():
             sys.exit("MegaExited through the nbdpy display. Thanks for using it!")
 
+        def HWrep():
+            count = 0
+            messagebox.showwarning(boxVarMessage," Use KeyboardInterrupt (Ctrl+C) to stop it! ")
+
+            rune = True
+            while rune:
+                print("Hello, world! ", count)
+                count += 1
+
 
         helloworld = Button(root, text = "Say Hello, World!", command = hello1)
         helloworld.place(x = 35, y = 50)
@@ -53,5 +62,8 @@ class nbDisplay:
 
         megaExitBt = Button(root, text = "MegaExit", command = megaExit)
         megaExitBt.place(x = 35, y = 150)
+
+        hwrepchk = Checkbutton(root, text= "spam hello world", command = HWrep)
+        hwrepchk.place(x = 100, y = 100)
 
         root.mainloop()

@@ -1,14 +1,42 @@
+from configparser import ConfigParser
 import sys
 import time
 from extShellData import *
 from nbdpy import *
 
-
 printStuffpc = True
 printStuff = True
 run = True
+config = ConfigParser()
+config.read("mainConfig.ini")
 
-animlib.loadingAnim("load",5)
+passPrint = "Please input password (Press enter if none was added): "
+
+try:
+    config_data1 = str(config["MAIN"]["debug"])
+    if config_data1 == "false":
+        animlib.loadingAnim("load",5)
+    elif config_data1 == "true":
+        print("debug mode = true")
+
+except:
+    exit("Error! Config file missing!")
+
+
+user = input("Please login (Admin or User1): ")
+
+if user == "ADMIN":
+    password = input(passPrint)
+    if password != "123456":
+        print("Wrong Password! Exiting...")
+        exit(0)
+
+try:
+        config_data2 = config[user]
+    
+except:
+    print("User Not found! Exiting...")
+    exit(0)
 
 while run == True:
 
@@ -28,7 +56,11 @@ while run == True:
         print("init pypassgen")
         print("hpg for a list of commands")
 
-    """    
+    """ 
+
+    user = input("Please login (Admin or User1): ")
+
+
     if printStuff == True:
         print("Hello There!")
         print("# Reminder!! Every command is CaSe SeNsItIvE")
@@ -111,6 +143,9 @@ while run == True:
 
     elif command == "MegaExit":
         sys.exit("M E G A E X I T")
+
+    # elif command == "createUser":
+
 
     #elif command == "createFile":
      #   os.
