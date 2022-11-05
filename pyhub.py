@@ -20,23 +20,32 @@ try:
         print("debug mode = true")
 
 except:
-    exit("Error! Config file missing!")
+    exit("Error! Config file or an element is missing!")
 
-
-user = input("Please login (Admin or User1): ")
-
-if user == "ADMIN":
-    password = input(passPrint)
-    if password != "123456":
-        print("Wrong Password! Exiting...")
-        exit(0)
 
 try:
-        config_data2 = config[user]
-    
+    ConfigDebugCheck = str(config["MAIN"]["skipUsers"])
+    if ConfigDebugCheck == "false":
+        user = input("Please login (Admin or User1): ")
+        if user == "ADMIN":
+            password = input(passPrint)
+            if password != "123456":
+                print("Wrong Password! Exiting...")
+                exit(0)
+
+            try:
+                config_data2 = config[user]
+            
+            except:
+                print("User Not found! Exiting...")
+                exit(0)
+
+    elif ConfigDebugCheck == "true":
+        print("skipping user selection")
+
 except:
-    print("User Not found! Exiting...")
-    exit(0)
+    exit("Error! Config file or an element is missing!")
+
 
 while run == True:
 
