@@ -13,7 +13,7 @@ Every command is CaSe SeNsItIvE!
 Help commands are written in txt files! It has games, tools and a screen creator!
 
 # GUI
-## New as of 1.5.2022!
+## New as of 1.5.11.22!
 
 You can easily exit without having to wait! (KeyboardInterrupt is still an option)
 Clear the shell window (Is this the "Adam Task" from TempleOs? (massive inspiration from there!!))
