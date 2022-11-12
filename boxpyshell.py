@@ -3,7 +3,7 @@ import sys
 import time
 from extShellData import *
 from nbdpy import *
-from userLogon import *
+# from userLogon import *
 
 printStuffpc = True
 printStuff = True
@@ -11,8 +11,20 @@ run = True
 cmdTagSuffix = ""
 cmdTagPrefix = "@boxpyshell $~: "
 cmdTagFull = str(cmdTagSuffix + cmdTagPrefix)
+config = ConfigParser()
+config.read("mainConfig.ini")
 
-logonSession.doLogin()
+try:
+    config_data1 = str(config["DEBUG"]["noloading"])
+    print(config_data1)
+    if config_data1 == "false # Skips Loading":
+        animlib.loadingAnim("load",5)
+    elif config_data1 == "true":
+        print("skipped animlib")
+        debugMode = True
+
+except:
+    exit("Error! Config file or an element is missing!")
 
 while run == True:
 
@@ -34,13 +46,8 @@ while run == True:
 
     """ 
 
-    user = input("Please login (Admin or User1): ")
-
-
     if printStuff == True:
-        print("Hello There!")
-        print("# Reminder!! Every command is CaSe SeNsItIvE")
-        print("Type 'help' for a list of avaiable commands")
+        print("Hello There!, ","Type 'help' for a list of avaiable commands")
         printStuff = False
     print("Please type a command.")
 
@@ -78,7 +85,7 @@ while run == True:
             print(file.read())           
 
     elif command == "source":
-        print("error: links not found")
+        print("Didn't add the links yet, sorry!")
 
     elif command == "screenCreate":
         print("Please input a command")

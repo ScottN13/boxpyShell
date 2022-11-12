@@ -3,6 +3,20 @@ from tkinter import *
 import random
 import time
 import sys
+from configparser import ConfigParser
+
+config = ConfigParser()
+config.read("mainConfig.ini")
+
+try:
+    configCheck1 = str(config["DEBUG"]["disableRem"])
+    if configCheck1 == "false # disables the reminder":
+        print("# Reminder!! Every command is CaSe SeNsItIvE")
+    else: 
+        print("")
+
+except:
+    exit("Error! Config file or an element is missing!")
 
 # cmd items not worth putting there
 cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy"]
