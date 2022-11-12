@@ -8,7 +8,7 @@
 boxpyShell is a shell i made.
 It has both CUI and GUI (as of update 1.5.2022 (the .5 is the build, i lost count)).
 
-# CUI
+# CLI
 Every command is CaSe SeNsItIvE!
 Help commands are written in txt files! It has games, tools and a screen creator!
 
