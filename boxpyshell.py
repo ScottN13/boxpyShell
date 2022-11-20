@@ -12,7 +12,7 @@ cmdTagSuffix = ""
 cmdTagPrefix = "@boxpyshell $~: "
 cmdTagFull = str(cmdTagSuffix + cmdTagPrefix)
 config = ConfigParser()
-config.read("mainConfig.ini")
+config.read("config/main.ini")
 
 try:
     config_data1 = str(config["DEBUG"]["noloading"])

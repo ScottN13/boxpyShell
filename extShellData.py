@@ -6,7 +6,7 @@ import sys
 from configparser import ConfigParser
 
 config = ConfigParser()
-config.read("mainConfig.ini")
+config.read("config/main.ini")
 
 try:
     configCheck1 = str(config["DEBUG"]["disableRem"])
