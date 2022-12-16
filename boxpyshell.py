@@ -17,7 +17,7 @@ config.read("config/main.ini")
 try:
     config_data1 = str(config["DEBUG"]["noloading"])
     print(config_data1)
-    if config_data1 == "false # Skips Loading":
+    if config_data1 == "false":
         animlib.loadingAnim("load",5)
     elif config_data1 == "true":
         print("skipped animlib")
@@ -85,7 +85,9 @@ while run == True:
             print(file.read())           
 
     elif command == "source":
-        print("Didn't add the links yet, sorry!")
+        file_pathSource = "data/source.txt"
+        with open(file_pathSource) as file:
+            print(file.read())
 
     elif command == "screenCreate":
         print("Please input a command")

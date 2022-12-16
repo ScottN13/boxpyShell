@@ -1,0 +1,9 @@
+#####
+#
+## Github Repo : https://github.com/ValkTheBoxman/boxpyShell
+#
+## ValkTheBoxman's Github Profile : https://github.com/ValkTheBoxman
+#
+## pyclock repo: https://github.com/ValkTheBoxman/pyclock-library
+#
+#####

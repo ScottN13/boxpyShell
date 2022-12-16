@@ -143,3 +143,9 @@ class extFunc:
             list = ["Yes","No","Probably","Probably Not"]
             ans = random.choice(list)
             print(ans)
+
+
+
+
+class pyclock:
+    ...
