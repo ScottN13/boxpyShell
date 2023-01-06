@@ -29,6 +29,6 @@ Default Windows installers.
 
 # Future plans/updates:
 There will be a release for the TI-84+ CE Python and the TI-NSPIRE calculators (might be very limited in terms of libraries!!)
-Avaiable for more platforms like MacOS and Linux
+Available for more platforms like MacOS and Linux
 
 ....package manager??
