@@ -79,7 +79,7 @@ while run == True:
         file_pathEX = 'data/helloworld.txt'
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
-        animlib.loadingAnim("load",5)
+        animlib.loadingAnim("load",2)
         spamClear()
         with open(file_pathEX) as file:
             print(file.read())           
