@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 import sys
 import time
+import os
 from extShellData import *
 from nbdpy import *
 # from userLogon import *
@@ -9,7 +10,7 @@ printStuffpc = True
 printStuff = True
 run = True
 cmdTagSuffix = ""
-OSNAME = 
+OSNAME = os.getlogin()
 cmdTagPrefix = f"boxpyshell@{OSNAME} $~: "
 cmdTagFull = str(cmdTagSuffix + cmdTagPrefix)
 config = ConfigParser()
