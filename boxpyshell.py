@@ -9,7 +9,8 @@ printStuffpc = True
 printStuff = True
 run = True
 cmdTagSuffix = ""
-cmdTagPrefix = "@boxpyshell $~: "
+OSNAME = 
+cmdTagPrefix = f"boxpyshell@{OSNAME} $~: "
 cmdTagFull = str(cmdTagSuffix + cmdTagPrefix)
 config = ConfigParser()
 config.read("config/main.ini")
@@ -23,10 +24,10 @@ try:
         print("skipped animlib")
         debugMode = True
 
-except:
-    exit("Error! Config file or an element is missing!")
+except Exception as Err:
+    exit(f"Error! Config file or an element is missing! -> {Err}")
 
-while run == True:
+while run is True:
 
     """
     def pyclockInit():
@@ -56,21 +57,18 @@ while run == True:
 
     if command == "help":
         print("Select which type of help to display: basic, ext1, ext2")
-        typeHelp = input()
+        typeHelp = input(" -> ").lowercase()
 
         if typeHelp == "basic":
-            file_path = 'data/help.txt'
-            with open(file_path) as file:
+            with open('data/help.txt') as file:
                 print(file.read())
 
         elif typeHelp == "ext1":
-            file_path = 'data/hpc.txt'
-            with open(file_path) as file:
+            with open('data/hpc.txt') as file:
                 print(file.read())
 
         elif typeHelp == "ext2":
-            file_path = 'data/hpg.txt'
-            with open(file_path) as file:
+            with open('data/hpg.txt') as file:
                 print(file.read())
 
         continue
@@ -136,8 +134,8 @@ while run == True:
     #elif command == "createFile":
      #   os.
 
-    elif command == "quit" or command == "exit":
-        animlib.loadingAnim("exit",5)
+    elif command in ("quit", "exit"):
+        animlib.loadingAnim("exit", 5)
         print("terminated main task. exit")
         sys.exit()
 
