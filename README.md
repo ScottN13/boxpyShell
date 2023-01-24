@@ -6,11 +6,9 @@
 ![maintained - yes](https://img.shields.io/badge/maintained-yes-blue) [![Made with Python](https://img.shields.io/badge/Python->=3.6-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage") 
 
 boxpyShell is a shell i made.
-It has both ClI and GUI (as of update 1.5.11.22)
-You can do normal stuff a normal terminal can do.
+It has both CLI and GUI (as of update 1.5.2022 (the .5 is the build, i lost count)).
 
-
-# CUI
+# CLI
 Every command is CaSe SeNsItIvE!
 Help commands are written in txt files! It has games, tools and a screen creator!
 
