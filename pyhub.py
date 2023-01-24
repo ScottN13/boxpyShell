@@ -23,22 +23,7 @@ except:
     exit("Error! Config file missing!")
 
 
-user = input("Please login (Admin or User1): ")
-
-if user == "ADMIN":
-    password = input(passPrint)
-    if password != "123456":
-        print("Wrong Password! Exiting...")
-        exit(0)
-
-try:
-        config_data2 = config[user]
-    
-except:
-    print("User Not found! Exiting...")
-    exit(0)
-
-while run == True:
+while run is True:
 
     """
     def pyclockInit():
@@ -58,13 +43,9 @@ while run == True:
 
     """ 
 
-    user = input("Please login (Admin or User1): ")
-
 
     if printStuff == True:
-        print("Hello There!")
-        print("# Reminder!! Every command is CaSe SeNsItIvE")
-        print("Type 'help' for a list of avaiable commands")
+        print("Hello There!\n# Reminder!! Every command is CaSe SeNsItIvE\nType 'help' for a list of avaiable commands")     
         printStuff = False
     print("Please type a command.")
 
@@ -143,6 +124,31 @@ while run == True:
 
     elif command == "MegaExit":
         sys.exit("M E G A E X I T")
+    
+    elif command in ("build", "run"):
+        command = command.split(" ", 4)
+        try:
+            if os.path.exists(command[1]) and ".py" in command[1]:
+                if command[2] in (">>", "->") and command[3] == ".exe":
+                    with open("file0.py", "w") as file:
+                        file.write(f"""import subprocess
+try:
+    import PyInstaller.__main__
+except ModuleNotFoundError:
+    subprocess.call(['python', '-m', 'pip', 'install', 'pyinstaller'])
+PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
+                    try:
+                        os.system("python file0.py")
+                        os.system("py file0.py")
+                        print(f"Successfully built {command[1]} to .exe")
+                    except PermissionError:
+                        print("PermissionError: Couldn't run file0.py")
+                if command[2] == "" and command[3] == "":
+                    os.system(f"python {command[1]}")
+                    os.system(f"python {command[1]}")
+        except IndexError:
+            print("Invalid params for build command")
+                
 
     # elif command == "createUser":
 
