@@ -156,7 +156,7 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
     elif command == "createFile":
         command = command.split(" ", 2)
         file = command[1]
-        file_extension = ".txt" if file[:5] not in (".txt", ".py", ".c", ".rc", ".java") else ""
+        file_extension = ".txt" if file[-5:] not in (".txt", ".py", ".c", ".rc", ".java") else ""
         with open(f"{file}{file_extension}", "w") as file:
             file.write("") # Writing nothing to the file so we can just create an empty file
 
