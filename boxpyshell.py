@@ -6,13 +6,9 @@ from extShellData import *
 from nbdpy import *
 # from userLogon import *
 
-printStuffpc = True
-printStuff = True
-run = True
-cmdTagSuffix = ""
+printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
-cmdTagPrefix = f"boxpyshell@{OSNAME} $~: "
-cmdTagFull = str(cmdTagSuffix + cmdTagPrefix)
+cmdTagFull = f"boxpyshell@{OSNAME} $~: "
 config = ConfigParser()
 config.read("config/main.ini")
 
@@ -48,8 +44,8 @@ while run is True:
 
     """ 
 
-    if printStuff == True:
-        print("Hello There!, ","Type 'help' for a list of avaiable commands")
+    if printStuff is True:
+        print("Hello There!, Type 'help' for a list of avaiable commands")
         printStuff = False
     print("Please type a command.")
 
@@ -75,17 +71,15 @@ while run is True:
         continue
 
     elif command == "readEX":
-        file_pathEX = 'data/helloworld.txt'
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
         animlib.loadingAnim("load",2)
         spamClear()
-        with open(file_pathEX) as file:
+        with open('data/helloworld.txt') as file:
             print(file.read())           
 
     elif command == "source":
-        file_pathSource = "data/source.txt"
-        with open(file_pathSource) as file:
+        with open("data/source.txt") as file:
             print(file.read())
 
     elif command == "screenCreate":
@@ -100,6 +94,27 @@ while run is True:
         for i in range(5):
             print("")
         extFunc.funct.echo(txtE)
+        ##########################
+        #You could also do:
+        #
+        #import re as regex
+        #
+        #find_echo_string = regex.search('"', _string)
+        #index_of_string = find_contents.span()
+        #echo_string = _string[index_of_string[1]:-1:1] -> Slicing from the start of the string to the end of the string to get the contents
+        #
+        #print(echo_string)
+        #
+        #So if my input was -> echo "Hello World!"
+        #it would return with just -> Hello World!
+        #
+        #this just makes the command more immediate
+        
+    elif command in ("?", "!"): #Command Flags for executing code
+        try:
+            exec(command[1:]) # Splitting the command flag from the string so we can run it
+        except Exception as Err:
+            print(f"Couldn't run code (Error Received) -> {Err}")
 
     elif command == "clearscreen":
         spamClear()
@@ -132,8 +147,12 @@ while run is True:
     # elif command == "createUser":
 
 
-    #elif command == "createFile":
-     #   os.
+    elif command == "createFile":
+        command = command.split(" ", 4)
+        with open(command[1], "w") as file: # Here command[1] is the filename
+            file.write("")
+        print(f"Successfully created {command[1]}!")
+        command = " ".join(command, 4)
 
     elif command in ("quit", "exit"):
         animlib.loadingAnim("exit", 5)
