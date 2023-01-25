@@ -1,4 +1,5 @@
 from configparser import ConfigParser
+from scriptparser import RemoteScriptBuilder
 import sys
 import time
 import os
@@ -8,7 +9,6 @@ from nbdpy import *
 
 printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
-cmdTagFull = f"boxpyshell@{OSNAME} $~: "
 config = ConfigParser()
 config.read("config/main.ini")
 
@@ -50,7 +50,7 @@ while run is True:
     print("Please type a command.")
 
 
-    command = input(cmdTagFull)
+    command = input(f"boxpyshell@{OSNAME} $~: ")
 
     if command == "help":
         print("Select which type of help to display: basic, ext1, ext2")
@@ -73,7 +73,7 @@ while run is True:
     elif command == "readEX":
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
-        animlib.loadingAnim("load",2)
+        animlib.loadingAnim("load", 2)
         spamClear()
         with open('data/helloworld.txt') as file:
             print(file.read())           
@@ -87,6 +87,10 @@ while run is True:
         cmmd = input()
         if cmmd == "createScreen1":
             pythonBasic.screens.createScreen()
+            
+    elif command == "addScript":
+        main = RemoteScriptBuilder()
+        main.run()
 
     elif command == "echo":
         print("Please type something to echo.")
