@@ -99,9 +99,9 @@ while run is True:
         #
         #import re as regex
         #
-        #find_echo_string = regex.search('"', _string)
-        #index_of_string = find_contents.span()
-        #echo_string = _string[index_of_string[1]:-1:1] -> Slicing from the start of the string to the end of the string to get the contents
+        #find_echo_string = regex.search('"', command)
+        #index_of_string = find_echo_string.span()
+        #echo_string = command[index_of_string[1]:-1:1] # -> Slicing from the start of the string to the end of the string to get the contents
         #
         #print(echo_string)
         #
