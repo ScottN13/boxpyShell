@@ -115,6 +115,31 @@ while run is True:
             exec(command[1:]) # Splitting the command flag from the string so we can run it
         except Exception as Err:
             print(f"Couldn't run code (Error Received) -> {Err}")
+    
+    elif command in ("build", "run"): # command should be structured like (build {filename}.py >> .exe) or (run {filename}.py)
+        command = command.split(" ", 4)
+        try:
+            if os.path.exists(command[1]) and ".py" in command[1]:
+                if command[2] in (">>", "->") and command[3] == ".exe":
+                    with open("file0.py", "w") as file:
+                        file.write(f"""import subprocess
+try:
+    import PyInstaller.__main__
+except ModuleNotFoundError:
+    subprocess.call(['python', '-m', 'pip', 'install', 'pyinstaller'])
+PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
+                    try:
+                        os.system("python file0.py")
+                        os.system("py file0.py")
+                        print(f"Successfully built {command[1]} to .exe")
+                    except PermissionError:
+                        print("PermissionError: Couldn't run file0.py")
+                if command[2] == "" and command[3] == "":
+                    os.system(f"python {command[1]}")
+                    os.system(f"python {command[1]}")
+        except IndexError:
+            print("Invalid params for build command")
+        command = " ".join(command, 4)
 
     elif command == "clearscreen":
         spamClear()
@@ -143,22 +168,19 @@ while run is True:
     elif command == "MegaExit":
         sys.exit("M E G A E X I T")
 
-
-    # elif command == "createUser":
-
-
     elif command == "createFile":
-        command = command.split(" ", 4)
-        with open(command[1], "w") as file: # Here command[1] is the filename
-            file.write("")
-        print(f"Successfully created {command[1]}!")
-        command = " ".join(command, 4)
+        command = command.split(" ", 2)
+        file = command[1]
+        file_extension = ".txt" if file[-5:] not in (".txt", ".py", ".c", ".rc", ".java") else ""
+        with open(f"{file}{file_extension}", "w") as file:
+            file.write("") # Writing nothing to the file so we can just create an empty file
+        command = " ".join(command, 2)
 
     elif command in ("quit", "exit"):
         animlib.loadingAnim("exit", 5)
         print("terminated main task. exit")
         sys.exit()
 
-    elif command != cmdList:
-        print("unknown command.")
+    elif command not in cmdList:
+        print(f"{command} is not a valid command!")
         continue
