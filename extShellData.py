@@ -106,13 +106,13 @@ class extFunc:
         def add():
             num1 = input("What is your first number? -> ")
             num2 = input("What is your second number? -> ")
-            print(f"adding {num1} + {num2})
+            print(f"adding ", {num1} + {num2})
             print(int(num1) + int(num2))
         
         def subtract():
             num1 = input("What is your first number? -> ")
             num2 = input("What is your second number? -> ")
-            print(f"subtracting {num1} - {num2})
+            print(f"subtracting ",{num1} - {num2})
             print(int(num1) - int(num2))
 
     class fun:

@@ -35,7 +35,7 @@ class RemoteScriptBuilder:
                         print(f"Error: Unable to open {name}")
                         time.sleep(3)
                         sys.exit()
-                 return self.contents
+                    return self.contents
         else:
             raise Exception(f"Couldn't find {name} on this device..")
         

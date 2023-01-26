@@ -54,7 +54,7 @@ while run is True:
 
     if command == "help":
         print("Select which type of help to display: basic, ext1, ext2")
-        typeHelp = input(" -> ").lowercase()
+        typeHelp = input(" -> ")
 
         if typeHelp == "basic":
             with open('data/help.txt') as file:
@@ -82,6 +82,7 @@ while run is True:
         with open("data/source.txt") as file:
             print(file.read())
 
+
     elif command == "screenCreate":
         print("Please input a command")
         cmmd = input()
@@ -93,8 +94,7 @@ while run is True:
         main.run()
 
     elif command == "echo":
-        print("Please type something to echo.")
-        txtE = input()
+        txtE = input("Type something to echo: ")
         for i in range(5):
             print("")
         extFunc.funct.echo(txtE)
@@ -113,6 +113,8 @@ while run is True:
         #it would return with just -> Hello World!
         #
         #this just makes the command more immediate
+
+        # ok, but i have no experience in regex -es -- valko
         
     elif command in ("?", "!"): #Command Flags for executing code
         try:
@@ -172,6 +174,7 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
     elif command == "MegaExit":
         sys.exit("M E G A E X I T")
 
+    # "createFile" is bugged: IndexError: list index is out of range: file = command[1]
     elif command == "createFile":
         command = command.split(" ", 2)
         file = command[1]
