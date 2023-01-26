@@ -20,17 +20,21 @@ class RemoteScriptBuilder:
         ...
         
         
-    def get_script_from_user(self, path: str) -> str:
-        if os.path.exists(path) is True:
-            with open(path, "r", "utf-8") as file:
-                self.contents = file.read()
-                if self.contents == "":
-                    self.file = os.path.split(path) # Getting file from path for error message
-                    print(f"Error: Unable to open {self.file[1]}")
-                    time.sleep(3)
-                    sys.exit()
-             return self.contents
-        sys.exit(f"The path provided doesn't exist on this machine..") if os.path.exists(path) is False else None # spaghetti (change later)
+    def get_script_from_user(self, name: str) -> str:
+        if name[-3:] != ".py":
+            raise Exception("Invalid File Format (Must be '.py'!)")
+        self._dir = glob.glob(fr"{pathlib.Path.home().drive}\\**\\{name}")
+        for self.files in self._dir:
+            if self.files == name:
+                with open(name, "r", "utf-8") as file:
+                    self.contents = file.read()
+                    if self.contents == "":
+                        print(f"Error: Unable to open {name}")
+                        time.sleep(3)
+                        sys.exit()
+                 return self.contents
+        else:
+            raise Exception(f"Couldn't find {name} on this device..")
         
      
     def add_file_to_list(self, name) -> None:
