@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 from scriptparser import RemoteScriptBuilder
+import re as regex
 import sys
 import time
 import os
