@@ -1,4 +1,5 @@
 from configparser import ConfigParser
+from scriptparser import RemoteScriptBuilder
 import sys
 import time
 import os
@@ -6,13 +7,8 @@ from extShellData import *
 from nbdpy import *
 # from userLogon import *
 
-printStuffpc = True
-printStuff = True
-run = True
-cmdTagSuffix = ""
+printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
-cmdTagPrefix = f"boxpyshell@{OSNAME} $~: "
-cmdTagFull = str(cmdTagSuffix + cmdTagPrefix)
 config = ConfigParser()
 config.read("config/main.ini")
 
@@ -48,13 +44,13 @@ while run is True:
 
     """ 
 
-    if printStuff == True:
-        print("Hello There!, ","Type 'help' for a list of avaiable commands")
+    if printStuff is True:
+        print("Hello There!, Type 'help' for a list of avaiable commands")
         printStuff = False
     print("Please type a command.")
 
 
-    command = input(cmdTagFull)
+    command = input(f"boxpyshell@{OSNAME} $~: ")
 
     if command == "help":
         print("Select which type of help to display: basic, ext1, ext2")
@@ -75,17 +71,15 @@ while run is True:
         continue
 
     elif command == "readEX":
-        file_pathEX = 'data/helloworld.txt'
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
-        animlib.loadingAnim("load",2)
+        animlib.loadingAnim("load", 2)
         spamClear()
-        with open(file_pathEX) as file:
+        with open('data/helloworld.txt') as file:
             print(file.read())           
 
     elif command == "source":
-        file_pathSource = "data/source.txt"
-        with open(file_pathSource) as file:
+        with open("data/source.txt") as file:
             print(file.read())
 
     elif command == "screenCreate":
@@ -93,6 +87,10 @@ while run is True:
         cmmd = input()
         if cmmd == "createScreen1":
             pythonBasic.screens.createScreen()
+            
+    elif command == "addScript":
+        main = RemoteScriptBuilder()
+        main.run()
 
     elif command == "echo":
         print("Please type something to echo.")
@@ -100,6 +98,52 @@ while run is True:
         for i in range(5):
             print("")
         extFunc.funct.echo(txtE)
+        ##########################
+        #You could also do:
+        #
+        #import re as regex
+        #
+        #find_echo_string = regex.search('"', command)
+        #index_of_string = find_echo_string.span()
+        #echo_string = command[index_of_string[1]:-1:1] # -> Slicing from the start of the string to the end of the string to get the contents
+        #
+        #print(echo_string)
+        #
+        #So if my input was -> echo "Hello World!"
+        #it would return with just -> Hello World!
+        #
+        #this just makes the command more immediate
+        
+    elif command in ("?", "!"): #Command Flags for executing code
+        try:
+            exec(command[1:]) # Splitting the command flag from the string so we can run it
+        except Exception as Err:
+            print(f"Couldn't run code (Error Received) -> {Err}")
+    
+    elif command in ("build", "run"): # command should be structured like (build {filename}.py >> .exe) or (run {filename}.py)
+        command = command.split(" ", 4)
+        try:
+            if os.path.exists(command[1]) and ".py" in command[1]:
+                if command[2] in (">>", "->") and command[3] == ".exe":
+                    with open("file0.py", "w") as file:
+                        file.write(f"""import subprocess
+try:
+    import PyInstaller.__main__
+except ModuleNotFoundError:
+    subprocess.call(['python', '-m', 'pip', 'install', 'pyinstaller'])
+PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
+                    try:
+                        os.system("python file0.py")
+                        os.system("py file0.py")
+                        print(f"Successfully built {command[1]} to .exe")
+                    except PermissionError:
+                        print("PermissionError: Couldn't run file0.py")
+                if command[2] == "" and command[3] == "":
+                    os.system(f"python {command[1]}")
+                    os.system(f"python {command[1]}")
+        except IndexError:
+            print("Invalid params for build command")
+        command = " ".join(command, 4)
 
     elif command == "clearscreen":
         spamClear()
@@ -128,18 +172,19 @@ while run is True:
     elif command == "MegaExit":
         sys.exit("M E G A E X I T")
 
-
-    # elif command == "createUser":
-
-
-    #elif command == "createFile":
-     #   os.
+    elif command == "createFile":
+        command = command.split(" ", 2)
+        file = command[1]
+        file_extension = ".txt" if file[-5:] not in (".txt", ".py", ".c", ".rc", ".java") else ""
+        with open(f"{file}{file_extension}", "w") as file:
+            file.write("") # Writing nothing to the file so we can just create an empty file
+        command = " ".join(command, 2)
 
     elif command in ("quit", "exit"):
         animlib.loadingAnim("exit", 5)
         print("terminated main task. exit")
         sys.exit()
 
-    elif command != cmdList:
-        print("unknown command.")
+    elif command not in cmdList:
+        print(f"{command} is not a valid command!")
         continue
