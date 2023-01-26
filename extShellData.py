@@ -28,8 +28,8 @@ print("extShell data init")
 ver = "1.6.01.23" # The first two digits stand for build number, the 2nd two stand for month and year.
  
 def spamClear():
-    for i in range(100):
-        print("")
+    os.system("clear")
+    os.system("cls")
 
 class animlib:
     def loadingAnim(x,y) -> None:
