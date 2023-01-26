@@ -3,6 +3,20 @@ from tkinter import *
 import random
 import time
 import sys
+from configparser import ConfigParser
+
+config = ConfigParser()
+config.read("config/main.ini")
+
+try:
+    configCheck1 = str(config["DEBUG"]["disableRem"])
+    if configCheck1 == "false # disables the reminder":
+        print("# Reminder!! Every command is CaSe SeNsItIvE")
+    else: 
+        print("")
+
+except:
+    exit("Error! Config file or an element is missing!")
 
 # cmd items not worth putting there
 cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy"]
@@ -11,7 +25,7 @@ scrCMDlist = ["t","ti","help","tc","pc","back"]
 print("extShell data init")
 
 #data
-ver = "1.5.11.22" # The first two digits stand for build number, the 2nd two stand for month and year.
+ver = "1.6.01.23" # The first two digits stand for build number, the 2nd two stand for month and year.
  
 def spamClear():
     for i in range(100):
@@ -120,3 +134,4 @@ class extFunc:
             list = ["Yes","No","Probably","Probably Not"]
             ans = random.choice(list)
             print(ans)
+

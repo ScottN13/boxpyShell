@@ -18,3 +18,15 @@ Help commands are written in txt files! It has games, tools and a screen creator
 You can easily exit without having to wait! (KeyboardInterrupt is still an option)
 Clear the shell window (Is this the "Adam Task" from TempleOs? (massive inspiration from there!!))
 Print Hello World! and tell (bad) jokes!
+
+# Installation
+You can use the latest release (dev or release build) [there is none at the moment]
+
+## Installers
+Default Windows installers.
+
+# Future plans/updates:
+There will be a release for the TI-84+ CE Python and the TI-NSPIRE calculators (might be very limited in terms of libraries!!)
+Available for more platforms like MacOS and Linux
+
+....package manager??
