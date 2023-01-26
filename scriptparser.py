@@ -25,6 +25,9 @@ class RemoteScriptBuilder:
             raise Exception("Invalid File Format (Must be '.py'!)")
         self._dir = glob.glob(fr"{pathlib.Path.home().drive}\\**\\{name}")
         for self.files in self._dir:
+            print(f"Combing ('{self.files}')")
+            os.system("clear")
+            os.system("cls")
             if self.files == name:
                 with open(name, "r", "utf-8") as file:
                     self.contents = file.read()
