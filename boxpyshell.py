@@ -92,27 +92,12 @@ while run is True:
         main = RemoteScriptBuilder()
         main.run()
 
-    elif command == "echo":
-        print("Please type something to echo.")
-        txtE = input()
-        for i in range(5):
-            print("")
-        extFunc.funct.echo(txtE)
-        ##########################
-        #You could also do:
-        #
-        #import re as regex
-        #
-        #find_echo_string = regex.search('"', command)
-        #index_of_string = find_echo_string.span()
-        #echo_string = command[index_of_string[1]:-1:1] # -> Slicing from the start of the string to the end of the string to get the contents
-        #
-        #print(echo_string)
-        #
-        #So if my input was -> echo "Hello World!"
-        #it would return with just -> Hello World!
-        #
-        #this just makes the command more immediate
+    elif command == "echo":        
+        find_echo_string = regex.search('"', command)
+        index_of_string = find_echo_string.span()
+        echo_string = command[index_of_string[1]:-1:1] # -> Slicing from the start of the string to the end of the string to get the contents
+        
+        print(echo_string)
         
     elif command in ("?", "!"): #Command Flags for executing code
         try:
