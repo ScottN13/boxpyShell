@@ -116,9 +116,9 @@ while run is True:
 
         # ok, but i have no experience in regex -es -- valko
         
-    elif command in ("?", "!"): #Command Flags for executing code
+    if command[:1] in ("?", "!"): #Command Flags for executing code
         try:
-            exec(command[1:]) # Splitting the command flag from the string so we can run it
+            exec(f"{command[1:]}") # Splitting the command flag from the string so we can run it
         except Exception as Err:
             print(f"Couldn't run code (Error Received) -> {Err}")
     
@@ -174,14 +174,16 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
     elif command == "MegaExit":
         sys.exit("M E G A E X I T")
 
-    # "createFile" is bugged: IndexError: list index is out of range: file = command[1]
     elif command == "createFile":
-        command = command.split(" ", 2)
-        file = command[1]
-        file_extension = ".txt" if file[-5:] not in (".txt", ".py", ".c", ".rc", ".java") else ""
-        with open(f"{file}{file_extension}", "w") as file:
-            file.write("") # Writing nothing to the file so we can just create an empty file
-        command = " ".join(command, 2)
+        try:
+            command = command.split(" ", 2)
+            file = command[1]
+            file_extension = ".txt" if file[-5:] not in (".txt", ".py", ".c", ".rc", ".java") else "" # Basically if the final 5 characters in the user string are not in the tuple, then file_extension = "" as command[1] will already have a file_extension
+            with open(f"{file}{file_extension}", "w") as file:
+                file.write("") # Writing nothing to the file so we can just create an empty file
+            command = " ".join(command, 2)
+        except Exception as Err: # If we get an index error, we know that the user most likely hasn't specified a filename
+            print(f"Please specify a filename!") if type(Err) == IndexError else print(f"CreateFileError: {Err}") # Printing first statement if Err is an index error, else we print the other statement
 
     elif command in ("quit", "exit"):
         animlib.loadingAnim("exit", 5)
