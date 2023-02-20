@@ -117,6 +117,7 @@ try:
     import PyInstaller.__main__
 except ModuleNotFoundError:
     subprocess.call(['python', '-m', 'pip', 'install', 'pyinstaller'])
+    import PyInstaller.__main__
 PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
                     try:
                         os.system("python file0.py")
