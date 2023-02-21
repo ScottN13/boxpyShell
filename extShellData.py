@@ -23,7 +23,7 @@ except:
 cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy"]
 scrCMDlist = ["t","ti","help","tc","pc","back"]
 
-console.print(f"["+"[bold][bright_green] OK [/]"+"]"+"[italic] External data is loaded!")
+console.print(f"[ [bold][bright_green] OK [/] ][italic] External data is loaded![/]")
 
 #data
 ver = "1.6.01.23" # The first two digits stand for build number, the 2nd two stand for month and year.
