@@ -3,9 +3,11 @@ from tkinter import *
 from tkinter import messagebox
 from extShellData import *
 from sys import *
+from rich.console import Console
 
+console = Console()
 boxVarMessage = "nbdpy message"
-print("nbdpy inited")
+console.print(f"["+"[bold][bright_green] OK [/]"+"]"+"[italic] BPS GUI is loaded!")
 
 class nbDisplay:
     def startDisplay():

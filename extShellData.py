@@ -4,16 +4,17 @@ import random
 import time
 import sys
 from configparser import ConfigParser
+from rich.console import Console
 
+console = Console()
 config = ConfigParser()
 config.read("config/main.ini")
 
 try:
     configCheck1 = str(config["DEBUG"]["disableRem"])
-    if configCheck1 == "false # disables the reminder":
+    if configCheck1 == "false":
         print("# Reminder!! Every command is CaSe SeNsItIvE")
-    else: 
-        print("")
+    else: ...
 
 except:
     exit("Error! Config file or an element is missing!")
@@ -22,7 +23,7 @@ except:
 cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy"]
 scrCMDlist = ["t","ti","help","tc","pc","back"]
 
-print("extShell data init")
+console.print(f"["+"[bold][bright_green] OK [/]"+"]"+"[italic] External data is loaded!")
 
 #data
 ver = "1.6.01.23" # The first two digits stand for build number, the 2nd two stand for month and year.

@@ -5,24 +5,48 @@ import time
 import os
 from extShellData import *
 from nbdpy import *
+from rich.console import Console
+from rich.progress import track
 # from userLogon import *
 
+console = Console()
 printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
 config = ConfigParser()
 config.read("config/main.ini")
 
+# Color Codes
+def warn(stri):
+    console.print(f"[bold][bright_yellow]█ Warning! -> {stri}[/]")
+def error(stri):
+    console.print(f"[bold][bright_red]█ Error! -> {stri}[/]")
+def success(stri):
+    console.print(f"[bold][bright_green]█ Success! -> {stri}[/]")
+
+# check if debug mode is on:
+try:
+    debug_check = str(config["DEBUG"]["isActive"])
+    if debug_check == "false":
+        debugMode = False
+    elif debug_check == "true":
+        console.print(f"["+"[bold][bright_yellow] WARN [/]"+"] Debug mode is on!")
+        debugMode = True    
+
+except Exception as Err:
+    console.print_exception(f"[bold][bright_red][Error!] Config file or an element is missing! -> {Err}")
+
+# check if the config for the animation lib has changed.
 try:
     config_data1 = str(config["DEBUG"]["noloading"])
-    print(config_data1)
+    # print(config_data1) -> THIS WAS WHAT PRINTED TRUE IN THE TERMINAL!!!
     if config_data1 == "false":
         animlib.loadingAnim("load",5)
     elif config_data1 == "true":
-        print("skipped animlib")
-        debugMode = True
+        console.print(f"["+"[bold][bright_green] OK [/]"+"]"+"[italic][bold][bright_red] DEBUG:[/]"+" loading animation skipped!")
 
 except Exception as Err:
-    exit(f"Error! Config file or an element is missing! -> {Err}")
+    console.print_exception(f"[bold][bright_red][Error!] Config file or an element is missing! -> {Err}")
+
 
 while run is True:
 
@@ -45,12 +69,13 @@ while run is True:
     """ 
 
     if printStuff is True:
+        warn("This version of boxpyshell is still in beta! There might be new releases on github!")
         print("Hello There!, Type 'help' for a list of avaiable commands")
         printStuff = False
     print("Please type a command.")
 
 
-    command = input(f"boxpyshell@{OSNAME} $~: ")
+    command = console.input(f"[bold][bright_yellow]boxpyshell[/][bright_magenta]@[/][bright_green]{OSNAME}$~:[/] ")
 
     if command == "help":
         print("Select which type of help to display: basic, ext1, ext2")
@@ -171,8 +196,13 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
     elif command == "nbdpy":
         nbDisplay.startDisplay()
 
-    elif command == "MegaExit":
+    elif command == "me":
         sys.exit("M E G A E X I T")
+
+    elif command == "testcolor":
+        warn("test")
+        error("test")
+        success('test')
 
     elif command == "createFile":
         try:
