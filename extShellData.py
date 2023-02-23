@@ -10,6 +10,14 @@ console = Console()
 config = ConfigParser()
 config.read("config/main.ini")
 
+# Color codes:
+def warn(stri):
+    console.print(f"[bold][bright_yellow]█ Warning! -> {stri}[/]")
+def error(stri):
+    console.print(f"[bold][bright_red]█ Error! -> {stri}[/]")
+def success(stri):
+    console.print(f"[bold][bright_green]█ Success! -> {stri}[/]")
+
 try:
     configCheck1 = str(config["DEBUG"]["disableRem"])
     if configCheck1 == "false":

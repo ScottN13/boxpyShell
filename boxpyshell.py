@@ -7,21 +7,13 @@ from extShellData import *
 from nbdpy import *
 from rich.console import Console
 from rich.progress import track
-# from userLogon import *
+from userLogon import logins
 
 console = Console()
 printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
 config = ConfigParser()
 config.read("config/main.ini")
-
-# Color Codes
-def warn(stri):
-    console.print(f"[bold][bright_yellow]█ Warning! -> {stri}[/]")
-def error(stri):
-    console.print(f"[bold][bright_red]█ Error! -> {stri}[/]")
-def success(stri):
-    console.print(f"[bold][bright_green]█ Success! -> {stri}[/]")
 
 # check if debug mode is on:
 try:
@@ -47,6 +39,7 @@ try:
 except Exception as Err:
     console.print_exception(f"[bold][bright_red][Error!] Config file or an element is missing! -> {Err}")
 
+logins.doLogin()
 
 while run is True:
 
@@ -203,6 +196,9 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
         warn("test")
         error("test")
         success('test')
+
+    elif command == "logout":
+        logins.logout()
 
     elif command == "createFile":
         try:
