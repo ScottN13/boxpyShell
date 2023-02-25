@@ -7,7 +7,7 @@ from configparser import ConfigParser
 from rich.console import Console
 
 console = Console()
-config = ConfigParser()
+config = ConfigParser(comment_prefixes="#", delimiters="=")
 config.read("config/main.ini")
 
 # Color codes:
