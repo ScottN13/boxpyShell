@@ -200,6 +200,10 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
     elif command == "logout":
         logins.logout()
 
+    elif command == "license":
+            with open('LICENSE.txt') as file:
+                print(file.read())
+
     elif command == "createFile":
         try:
             command = command.split(" ", 2)
