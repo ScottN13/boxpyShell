@@ -3,7 +3,7 @@ from scriptparser import RemoteScriptBuilder
 import sys
 import time
 import os
-from extShellData import *
+from boxEngine import *
 from nbdpy import *
 from rich.console import Console
 from rich.progress import track
@@ -25,7 +25,7 @@ try:
         debugMode = True    
 
 except Exception as Err:
-    console.print_exception(f"[bold][bright_red][Error!] Config file or an element is missing! -> {Err}")
+    boxEngine.error.ConfigFatal(Err)
 
 # check if the config for the animation lib has changed.
 try:
@@ -37,7 +37,7 @@ try:
         console.print(f"["+"[bold][bright_green] OK [/]"+"]"+"[italic][bold][bright_red] DEBUG:[/]"+" loading animation skipped!")
 
 except Exception as Err:
-    console.print_exception(f"[bold][bright_red][Error!] Config file or an element is missing! -> {Err}")
+    boxEngine.error.ConfigFatal(Err)
 
 logins.doLogin()
 
@@ -92,7 +92,7 @@ while run is True:
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
         animlib.loadingAnim("load", 2)
-        spamClear()
+        boxEngine.spamClear()
         with open('data/helloworld.txt') as file:
             print(file.read())           
 
@@ -100,6 +100,22 @@ while run is True:
         with open("data/source.txt") as file:
             print(file.read())
 
+    elif command == "config":
+        warn("You are changing the main.ini configuartion file. Please be warned that any typo can break boxpyshell!")
+        uInput = console.input("[bold]What would block you like to change?")
+        uIBlocks = ["main","debug","ext","external","m","d","e"] # List of commands, full (external), inital letters (e), shortened (ext)
+
+        if uInput != uIBlocks: # spell check
+            error(f"No such thing as {uInput}! Run the command again.")
+
+        elif uInput == "main" or uInput == "m": # edit main
+            boxEngine.error.NotImplement()
+
+        elif uInput == "ext" or uInput == "external" or uInput == "e": # edit ext
+            boxEngine.error.NotImplement()
+
+        elif uInput == "debug" or uInput == "d":
+            boxEngine.error.NotImplement()
 
     elif command == "screenCreate":
         print("Please input a command")
@@ -115,7 +131,7 @@ while run is True:
         txtE = input("Type something to echo: ")
         for i in range(5):
             print("")
-        extFunc.funct.echo(txtE)
+        boxEngine.funct.echo(txtE)
         ##########################
         #You could also do:
         #
@@ -165,26 +181,26 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
             print("Invalid params for build command")
         command = " ".join(command, 4)
 
-    elif command == "clearscreen":
-        spamClear()
+    elif command == "clearscreen" or command == "clear":
+        boxEngine.spamClear()
     
     elif command == "shellVer":
-        extFunc.funct.shellVer()
+        boxEngine.extFunc.funct.shellVer()
         
     elif command == "MathAdd":
-        extFunc.math.add()
+        boxEngine.extFunc.math.add()
 
     elif command == "MathSubt":
-        extFunc.math.subtract()
+        boxEngine.extFunc.math.subtract()
     
     elif command == "helloMe":
-        extFunc.fun.helloUser()
+        boxEngine.extFunc.fun.helloUser()
 
     elif command == "8Ball":
-        extFunc.fun.eightBall()
+        boxEngine.extFunc.fun.eightBall()
 
     elif command == "YesOrNo":
-        extFunc.fun.ynGame()
+        boxEngine.extFunc.fun.ynGame()
 
     elif command == "nbdpy":
         nbDisplay.startDisplay()
