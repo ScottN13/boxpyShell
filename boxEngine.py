@@ -28,22 +28,63 @@ except:
     exit("Error! Config file or an element is missing!")
 
 # cmd items not worth putting there
-cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy"]
+cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy","vars","cvar"]
 scrCMDlist = ["t","ti","help","tc","pc","back"]
 ver = str(config["MAIN"]["version"])
 console.print(f"[ [bold][bright_green] OK [/] ][italic] boxEngine is loaded![/]")
 
 class boxEngine:
+    def rmdir(path: str):
+        os.rmdir(path)
+
+    def mkdir(name: str):
+        os.mkdir(name)
+
     def spamClear():
         for i in range(100):
             print("")
+
+    def cvar(): # this one wont write.
+        with open('data/cvar.txt') as file:
+            print(f"cvar value = {file.read()}")
+            lines = file.readlines()
+
+        cvarI = input("cvar> ")
+        if cvarI == "exit": ...
+        elif cvarI == "change":
+            print("Input new string or integer to change.")
+            ce = input("cvar>change>")
+            with open("data/cvar.txt", "wt") as file:
+                for i in lines:
+                    file.write(ce)
+                print(f"New cvar value is:{ce}")
+
+    def vars():
+        config.read("config/vars.ini")
+        try:
+            readVars = str(config.items("VARS"))
+            print("Current vars are:")
+            print(readVars)
+        except:
+            boxEngine.error.data404()
     
-    class error:
+    class error():
+        def noCvar():
+            error("File 'cvar.txt' in /data/ wasn't found.")
+
         def NotImplement():
             warn("Sorry, but this function is not implemented yet!")
 
         def ConfigFatal(Err):
             console.print_exception(f"[bold][bright_red][Error!] Config file or an element is missing! -> {Err}")
+        
+        def data404():
+            error("Data needed to access wasn't found.")
+
+        def userFail():
+            error("Input Password failed too many times.")
+
+        def user404(): ...
 
     class funct:
         def echo(x):

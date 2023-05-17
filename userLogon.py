@@ -34,9 +34,9 @@ class logins:
         try: 
             config.read("config/main.ini")
             login_cnf = str(config["DEBUG"]["skipUsers"])
-            if login_cnf == " false":
+            if login_cnf == "false":
                 bypassLogin = False # will prompt to login as any user besides root.
-            elif login_cnf == " true":
+            elif login_cnf == "true":
                 bypassLogin = True # no prompt, login as root if possible.
 
         except Exception as Err:

@@ -6,7 +6,9 @@
 ![maintained - yes](https://img.shields.io/badge/maintained-yes-blue) [![Made with Python](https://img.shields.io/badge/Python->=3.6-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage") 
 
 boxpyShell is a shell i made.
-It has both CLI and GUI (as of update 1.5.2022 (the .5 is the build, i lost count)).
+It has both CLI and GUI thats mostly broken.
+it has the ability to run user made programs (scripts), read files, and more.
+This work is licensed under the GNU GPL v3 License. Made by ValkTheBoxman and Gusic06
 
 # CLI
 Every command is CaSe SeNsItIvE!

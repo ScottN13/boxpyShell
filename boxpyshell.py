@@ -65,7 +65,7 @@ while run is True:
         warn("This version of boxpyshell is still in beta! There might be new releases on github!")
         print("Hello There!, Type 'help' for a list of avaiable commands")
         printStuff = False
-    print("Please type a command.")
+        print("Please type a command.")
 
 
     command = console.input(f"[bold][bright_yellow]boxpyshell[/][bright_magenta]@[/][bright_green]{OSNAME}$~:[/] ")
@@ -99,6 +99,23 @@ while run is True:
     elif command == "source":
         with open("data/source.txt") as file:
             print(file.read())
+
+    elif command == "cvar":
+        boxEngine.cvar()
+
+    elif command == "vars":
+        boxEngine.vars()
+
+    elif command == "rmdir":
+        path = input("Path to remove directory: ")
+        boxEngine.rmdir(path)
+    
+    elif command == "mkdir":
+        name = input("Give a name for the new directory: ")
+        if name == None or name == "":
+            error("You cannot choose an empty name.")
+        else:
+            boxEngine.mkdir(name)
 
     elif command == "config":
         warn("You are changing the main.ini configuartion file. Please be warned that any typo can break boxpyshell!")
