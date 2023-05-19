@@ -31,7 +31,7 @@ except:
 cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy","vars","cvar"]
 scrCMDlist = ["t","ti","help","tc","pc","back"]
 ver = str(config["MAIN"]["version"])
-console.print(f"[ [bold][bright_green] OK [/] ][italic] boxEngine is loaded![/]")
+console.print(f"[ [bold][bright_green]OK[/] ][italic] boxEngine is loaded![/]")
 
 class boxEngine:
     def rmdir(path: str):
@@ -49,13 +49,14 @@ class boxEngine:
             print(f"cvar value = {file.read()}")
             lines = file.readlines()
 
+
         cvarI = input("cvar> ")
         if cvarI == "exit": ...
         elif cvarI == "change":
             print("Input new string or integer to change.")
-            ce = input("cvar>change>")
+            ce = input("cvar>change> ")
             with open("data/cvar.txt", "wt") as file:
-                for i in lines:
+                for line in lines:
                     file.write(ce)
                 print(f"New cvar value is:{ce}")
 
@@ -84,7 +85,8 @@ class boxEngine:
         def userFail():
             error("Input Password failed too many times.")
 
-        def user404(): ...
+        def user404():
+            error("User not found.")
 
     class funct:
         def echo(x):
