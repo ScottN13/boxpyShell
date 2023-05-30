@@ -34,6 +34,12 @@ ver = str(config["MAIN"]["version"])
 console.print(f"[ [bold][bright_green]OK[/] ][italic] boxEngine is loaded![/]")
 
 class boxEngine:
+    def rok():
+        return "Exit status:", 0
+    
+    def rno():
+        return "Something wrong happened, exit status:",0
+
     def rmdir(path: str):
         os.rmdir(path)
 
