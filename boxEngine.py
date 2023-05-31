@@ -134,34 +134,6 @@ class pythonBasic:
         def identify():
             string = input()
             id(string)
-    class screens:
-        def createScreen():
-            run = TRUE
-            while run:
-                print("close to continue your shell task")
-                #self explanatory
-                print("Choose what should pop up? (text,image,etc.)")
-                inputWish = input()
-                if inputWish == "t":
-                    print("Input a text message to show up on the screen")
-                    labelName = input()
-                    print("exit window to continue your tasks")
-
-                    #tkinter window data
-                    root=Tk()
-                    root.geometry("600x300")
-                    #label
-                    cusLabel=Label(root,text=labelName,font="times 24 bold")
-                    cusLabel.grid(row=0,column=2)
-                    
-                    #nota=Label(root,text="",font="times 15 bold")
-                    #nota.grid(row=3,column=2)
-                    root.mainloop()
-                break
-                
-                if inputWish != scrCMDlist:
-                    print("COMMAND IS WRONG")
-                    continue
             
 
     class math:

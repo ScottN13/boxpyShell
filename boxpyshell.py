@@ -42,25 +42,7 @@ except Exception as Err:
 logins.doLogin()
 
 while run is True:
-
-    """
-    def pyclockInit():
-       # from pyclock import *
-        if printStuffpc == True:
-            print("init pyclock-library")
-            print("hpc for a list of  commands")
-            print("!!!WARRNINGG!!! This version of pyclock is 0.4 experimental and has some bugs with the events class!")
-            print("Learn more on the pull request i made on github. You can get the links by putting 'source' on the main menu terminal")
-            printStuffpc = False
-        print("please type a command.")
-     
-    def passgenInit():
-        #from passgen import *
-        print("init pypassgen")
-        print("hpg for a list of commands")
-
-    """ 
-
+    
     if printStuff is True:
         warn("This version of boxpyshell is still in beta! There might be new releases on github!")
         print("Hello There!, Type 'help' for a list of avaiable commands")
