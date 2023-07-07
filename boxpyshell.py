@@ -29,7 +29,6 @@ except Exception as Err:
 # check if the config for the animation lib has changed.
 try:
     config_data1 = str(config["DEBUG"]["noloading"])
-    # print(config_data1) -> THIS WAS WHAT PRINTED TRUE IN THE TERMINAL!!!
     if config_data1 == "false":
         animlib.loadingAnim("load",5)
     elif config_data1 == "true":
@@ -38,9 +37,9 @@ try:
 except Exception as Err:
     boxEngine.error.ConfigFatal(Err)
 
-logins.doLogin()
+logins.doLogin() # Make a login. Is bypassed if skipLogin is true.
 
-while run is True:
+while run is True: # Main Loop
     
     if printStuff is True:
         warn("This version of boxpyshell is still in beta! There might be new releases on github!")
@@ -49,9 +48,9 @@ while run is True:
         print("Please type a command.")
 
 
-    command = console.input(f"[bold][bright_yellow]boxpyshell[/][bright_magenta]@[/][bright_green]{OSNAME}$~:[/] ")
+    command = console.input(f"[bold][bright_yellow]boxpyshell[/][bright_magenta]@[/][bright_green]{OSNAME}$~:[/] ") # OSNAME = Host name.
 
-    if command == "help":
+    if command == "help": # Help is read in /data/ for easier code readability.
         print("Select which type of help to display: basic, ext1, ext2")
         typeHelp = input(" -> ")
 
@@ -69,7 +68,7 @@ while run is True:
 
         continue
 
-    elif command == "readEX":
+    elif command == "readEX": # Just what the first print() says. sauce is in /data/
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
         animlib.loadingAnim("load", 2)
@@ -81,13 +80,13 @@ while run is True:
         with open("data/source.txt") as file:
             print(file.read())
 
-    elif command == "cvar":
+    elif command == "cvar": # Common variable
         boxEngine.cvar()
 
-    elif command == "vars":
+    elif command == "vars": # Variables stored in /config/vars.ini
         boxEngine.vars()
 
-    elif command == "rmdir":
+    elif command == "rmdir": # gnu :4khdtroll:
         path = input("Path to remove directory: ")
         boxEngine.rmdir(path)
     
@@ -121,11 +120,11 @@ while run is True:
         if cmmd == "createScreen1":
             pythonBasic.screens.createScreen()
             
-    elif command == "addScript":
+    elif command == "addScript": # Only gusic knows wtf is going in there.
         main = RemoteScriptBuilder()
         main.run()
 
-    elif command == "echo":
+    elif command == "echo": # i need to switch to regex
         txtE = input("Type something to echo: ")
         for i in range(5):
             print("")
@@ -174,7 +173,7 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
                         print("PermissionError: Couldn't run file0.py")
                 if command[2] == "" and command[3] == "":
                     os.system(f"python {command[1]}")
-                    os.system(f"python {command[1]}")
+                    os.system(f"python {command[1]}") #  WHAT THE FUCK IS GOING ON
         except IndexError:
             print("Invalid params for build command")
         command = " ".join(command, 4)
@@ -199,7 +198,7 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
 
     elif command == "YesOrNo":
         boxEngine.extFunc.fun.ynGame()
-        
+
     elif command == "me":
         sys.exit("M E G A E X I T")
 
