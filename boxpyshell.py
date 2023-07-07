@@ -4,7 +4,6 @@ import sys
 import time
 import os
 from boxEngine import *
-from nbdpy import *
 from rich.console import Console
 from rich.progress import track
 from userLogon import logins
@@ -200,10 +199,7 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
 
     elif command == "YesOrNo":
         boxEngine.extFunc.fun.ynGame()
-
-    elif command == "nbdpy":
-        nbDisplay.startDisplay()
-
+        
     elif command == "me":
         sys.exit("M E G A E X I T")
 

@@ -1,5 +1,4 @@
 import os
-from tkinter import *
 import random
 import time
 import sys
@@ -28,7 +27,7 @@ except:
     exit("Error! Config file or an element is missing!")
 
 # cmd items not worth putting there
-cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","nbdpy","vars","cvar"]
+cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","vars","cvar"]
 scrCMDlist = ["t","ti","help","tc","pc","back"]
 ver = str(config["MAIN"]["version"])
 console.print(f"[ [bold][bright_green]OK[/] ][italic] boxEngine is loaded![/]")
