@@ -23,6 +23,7 @@ Print Hello World! and tell (bad) jokes!
 
 # Installation
 You can use the latest release (dev or release build) [there is none at the moment]
+Don't have all the modules? Run the installer.py script. From there, after it's done, you will enter the updater.
 
 ## Installers
 Default Windows installers.
