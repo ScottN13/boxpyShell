@@ -1,12 +1,19 @@
 from configparser import ConfigParser
 from boxEngine import *
 from rich.console import Console
+import hashlib
+
 
 console = Console()
 config = ConfigParser(comment_prefixes="#", delimiters="=")
 
 
 class logins:
+
+    def __init__(self):
+        self.hash = hashlib.md5()
+        self.password = str(config["USER"]["pass"])
+
     def doLogin():
         OSNAME = os.getlogin()
         bypassLogin = False
@@ -49,7 +56,7 @@ class logins:
             for i in range(0, tries)[::-1]:
                 password = str(config["USER"]["pass"])
                 passinput = console.input(f"[bold]Please input the password for {OSNAME} :", password=True)
-                if passinput == password:
+                if passinput == password:                    
                     console.print(f"[bold][bright_green]Success! Logged in as {OSNAME}!")
                     break
 
