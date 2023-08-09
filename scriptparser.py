@@ -1,10 +1,18 @@
 from boxEngine import *
 from configparser import ConfigParser
-import pathlib
+
 import os
+from os.path import exists, isdir
 import sys
 import time
-import glob
+
+import_failed = False
+try:
+    from _scripts import _scripts
+except Exception:
+    import_failed = True
+    with open("_scripts.py", "w") as file:
+        file.write("")
 
 config = ConfigParser()
 config.read("config/cmds.ini")
@@ -17,57 +25,65 @@ class RemoteScriptBuilder:
     All params are dealt with in the class so no need to specify them when calling the run function
     """
   
-    def __init__(self) -> None:
-        ...
+    def __init__(self):
+        if exists("packages") is False:
+            os.mkdir("packages")
         
         
-    def get_script_from_user(self, name: str) -> str:
-        if name[-3:] != ".py":
+    def get_script_from_user(self, path_name: str):
+        if path_name[-3:] != ".py":
             raise Exception("Invalid File Format (Must be '.py'!)")
-        self._dir = glob.glob(fr"{pathlib.Path.home().drive}\\**\\{name}")
-        for self.files in self._dir:
-            print(f"Combing ('{self.files}')")
-            os.system("clear")
-            os.system("cls")
-            if self.files == name:
-                with open(name, "r", "utf-8") as file:
-                    self.contents = file.read()
-                    if self.contents == "":
-                        print(f"Error: Unable to open {name}")
-                        time.sleep(3)
-                        sys.exit()
+        
+        if exists(path_name) and isdir(path_name) is False:
+            with open(path_name, "r") as file:
+                self.contents = file.read()
+                if self.contents == "":
+                    print(f"Error: Unable to open {path_name}")
+                    time.sleep(3)
+                    sys.exit()
+                else:
                     return self.contents
         else:
-            raise Exception(f"Couldn't find {name} on this device..")
+            raise Exception(f"Couldn't find {path_name} on this device..")
         
      
-    def add_file_to_list(self, name) -> None:
-        with open("_scripts.txt", "w") as file:
-            if os.path.exists(name) is True and name[-3:] == ".py":
-                file.write(f"{name}")
-                print(f"Successfully added {name} to '_scripts.txt'")
-            else:
-                print(f"{name} is an invalid file (Maybe you forgot to add '.py' to the end?)")
+    def add_file_to_list(self, name, path_to_package):
+        name = name.split(".py", 2)
+        if import_failed is True:
+            _list = [name[0], path_to_package]
+            contents = f"""# Package List
+def _scripts():
+    return {_list}
+"""
+        else:
+            _list = _scripts()
+            _list.append(name[0])
+            _list.append(path_to_package)
+            contents = f"""# Package List
+def _scripts():
+    return {_list}
+"""
+
+        with open("_scripts.py", "w") as file:
+            file.write(f"{contents}")
         
         
-    def build_file(self, name: str) -> None:
+    def build_file(self, name: str):
         self._contents = self.get_script_from_user(input("Path to the Script file -> "))
         self.name = f"{name}.py" if name[-3:] != ".py" else name
         try:
-            if os.path.exists("scripts") is True:
-                with open(f".\\scripts\\{self.name}", "w") as file:
-                    file.write(f"'Script for BoxPyShell'\n{self._contents}")
-            if os.path.exists("scripts") is False:
-                os.mkdir("scripts")
-                with open(f".\\scripts\\{self.name}", "w") as file:
-                    file.write(f"'Script for BoxPyShell'\n{self._contents}")
-            self.add_files_to_list(self.name)
+            if os.path.exists("packages") is True:
+                with open(f".\\packages\\{self.name}", "w") as file:
+                    file.write(f"'Package for BoxPyShell'\n{self._contents}")
+                self.path_to_package = os.path.abspath(f".\\packages\\{name}.py")
+
+            self.add_file_to_list(self.name, self.path_to_package)
         except Exception as Err:
             print(f"Unable to create {self.file} due to a PermissionError") if type(Err) == PermissionError else print(f"Unable to create {self.file} -> {Err}")
         
         
-    def run(self) -> None:
-        self.build_file(input("What do you wamt to name your script? -> "))
+    def run(self):
+        self.build_file(input("What do you want to name your script? -> "))
         
         
 if __name__ == "__main__":
