@@ -71,9 +71,7 @@ while run is True: # Main Loop
     if import_failed is False:
         if command in packages:
             index_number = packages.index(command)
-            with open(f"{packages[index_number + 1]}", "r") as file:
-                code = file.read()
-            exec(code)
+            os.system(f"py {packages[index_number]}")
 
     if command == "help": # Help is read in /data/ for easier code readability.
         print("Select which type of help to display: basic, ext1, ext2")
