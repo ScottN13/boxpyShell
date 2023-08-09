@@ -7,12 +7,21 @@ from boxEngine import *
 from rich.console import Console
 from rich.progress import track
 from userLogon import logins
-
 console = Console()
+import_failed = False
+try:
+    from _scripts import _scripts # a little cursed but if it works, it works
+except Exception:
+    console.print("[bold][ [red]ERR[/] ] Scripts file[/]")
+    import_failed = True
+
 printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
 config = ConfigParser(comment_prefixes="#", delimiters="=")
 config.read("config/main.ini")
+
+if import_failed is False:
+    packages = _scripts()
 
 # check if debug mode is on:
 try:
@@ -20,7 +29,7 @@ try:
     if debug_check == "false":
         debugMode = False
     elif debug_check == "true":
-        console.print(f"["+"[bold][bright_yellow] WARN [/]"+"] Debug mode is on!")
+        console.print(f"[bold][bright_yellow] WARN [/] Debug mode is on!")
         debugMode = True    
 
 except Exception as Err:
@@ -32,7 +41,7 @@ try:
     if config_data1 == "false":
         animlib.loadingAnim("load",5)
     elif config_data1 == "true":
-        console.print(f"["+"[bold][bright_green] OK [/]"+"]"+"[italic][bold][bright_red] DEBUG:[/]"+" loading animation skipped!")
+        console.print(f"[bold][bright_green] OK [/][italic][bold][bright_red] DEBUG:[/] loading animation skipped!")
 
 except Exception as Err:
     boxEngine.error.ConfigFatal(Err)
@@ -43,12 +52,28 @@ while run is True: # Main Loop
     
     if printStuff is True:
         warn("This version of boxpyshell is still in beta! There might be new releases on github!")
-        print("Hello There!, Type 'help' for a list of avaiable commands")
+        console.print("[bold]Hello There!, Type [yellow]'help'[/] for a list of available commands[/]")
         printStuff = False
-        print("Please type a command.")
+        console.print("[bold]Please type a command.[/]")
 
 
     command = console.input(f"[bold][bright_yellow]boxpyshell[/][bright_magenta]@[/][bright_green]{OSNAME}$~:[/] ") # OSNAME = Host name.
+
+    if command == "create_package":
+        RemoteScriptBuilder().run()
+        try:
+            from _scripts import _scripts 
+            packages = _scripts()
+            import_failed = False
+        except Exception:
+            console.print("[bold]Please restart to start using your packages[/]")
+
+    if import_failed is False:
+        if command in packages:
+            index_number = packages.index(command)
+            with open(f"{packages[index_number + 1]}", "r") as file:
+                code = file.read()
+            exec(code)
 
     if command == "help": # Help is read in /data/ for easier code readability.
         print("Select which type of help to display: basic, ext1, ext2")
@@ -179,7 +204,7 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
         command = " ".join(command, 4)
 
     elif command == "clearscreen" or command == "clear":
-        boxEngine.spamClear()
+        os.system("cls")
     
     elif command == "shellVer":
         boxEngine.extFunc.funct.shellVer()
@@ -230,6 +255,6 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
         print("terminated main task. exit")
         sys.exit()
 
-    elif command not in cmdList:
+    elif command not in cmdList and command not in packages:
         print(f"{command} is not a valid command!")
         continue
