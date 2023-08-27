@@ -54,15 +54,15 @@ while run is True: # Main Loop
         typeHelp = input(" -> ")
 
         if typeHelp == "basic":
-            with open('data/help.txt') as file:
+            with open('data/txt/help.txt') as file:
                 print(file.read())
 
         elif typeHelp == "ext1":
-            with open('data/hpc.txt') as file:
+            with open('data/txt/hpc.txt') as file:
                 print(file.read())
 
         elif typeHelp == "ext2":
-            with open('data/hpg.txt') as file:
+            with open('data/txt/hpg.txt') as file:
                 print(file.read())
 
         continue
@@ -72,11 +72,11 @@ while run is True: # Main Loop
         print("Please wait...")
         animlib.loadingAnim("load", 2)
         boxEngine.spamClear()
-        with open('data/helloworld.txt') as file:
+        with open('data/txt/helloworld.txt') as file:
             print(file.read())           
 
     elif command == "source":
-        with open("data/source.txt") as file:
+        with open("data/txt/source.txt") as file:
             print(file.read())
 
     elif command == "cvar": # Common variable

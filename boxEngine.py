@@ -28,12 +28,15 @@ except:
     exit("Error! Config file or an element is missing!")
 
 # cmd items not worth putting there
-cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","vars","cvar"]
-scrCMDlist = ["t","ti","help","tc","pc","back"]
+cmdList = ["shellBasic","source","pyclockInit","passgenInit","help","quit","exit","vars","cvar","box"]
 ver = str(config["MAIN"]["version"])
 console.print(f"[ [bold][bright_green]OK[/] ][italic] boxEngine is loaded![/]")
 
 class boxEngine:
+
+    def box(string):
+        from git import Repo        
+
     def rok():
         return "Exit status:", 0
     
@@ -51,7 +54,7 @@ class boxEngine:
             print("")
 
     def cvar(): # this one wont write.
-        with open('data/cvar.txt') as file:
+        with open('data/txt/cvar.txt') as file:
             print(f"cvar value = {file.read()}")
             lines = file.readlines()
 
@@ -61,7 +64,7 @@ class boxEngine:
         elif cvarI == "change":
             print("Input new string or integer to change.")
             ce = input("cvar>change> ")
-            with open("data/cvar.txt", "wt") as file:
+            with open("data/txt/cvar.txt", "wt") as file:
                 for line in lines:
                     file.write(ce)
                 print(f"New cvar value is:{ce}")
@@ -77,7 +80,7 @@ class boxEngine:
     
     class error():
         def noCvar():
-            error("File 'cvar.txt' in /data/ wasn't found.")
+            error("File 'cvar.txt' in /data/txt/ wasn't found.")
 
         def NotImplement():
             warn("Sorry, but this function is not implemented yet!")
