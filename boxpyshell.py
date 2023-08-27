@@ -5,7 +5,6 @@ import time
 import os
 from boxEngine import *
 from rich.console import Console
-from rich.progress import track
 from userLogon import logins
 
 console = Console()
@@ -96,6 +95,9 @@ while run is True: # Main Loop
             error("You cannot choose an empty name.")
         else:
             boxEngine.mkdir(name)
+
+    elif command == "pcinfo":
+        ...
 
     elif command == "config":
         warn("You are changing the main.ini configuartion file. Please be warned that any typo can break boxpyshell!")

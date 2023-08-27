@@ -1,6 +1,7 @@
 import os
 import random
 import time
+import platform
 import sys
 from configparser import ConfigParser
 from rich.console import Console
@@ -99,6 +100,13 @@ class boxEngine:
         
         def shellVer():          
             print(f"boxpyshell created by ValkTheBoxman\nver: {ver} Build: main\n（＾ω＾）\n")
+
+
+    class pc:
+        def info():
+            # get pc info
+            uname = platform.uname()
+            print(f"CPU bit:{platform.machine()}\n",f"PC OS: {platform.platform}\n",f"PC Nodename:{uname.node()}")
 
 class animlib:
     def loadingAnim(x,y) -> None:
