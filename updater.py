@@ -6,7 +6,7 @@ from rich.console import Console
 
 console = Console()
 config = ConfigParser(comment_prefixes="#", delimiters="=")
-config.read("config/main.ini")
+config.read("data/config/main.ini")
 current_version = str(config["MAIN"]["version"])  # Gets version from config main.ini
 current_channel = str(config["MAIN"]["channel"])  # Gets branch selection from config main.ini
 

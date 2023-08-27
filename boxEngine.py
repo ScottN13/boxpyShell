@@ -8,7 +8,7 @@ from rich.console import Console
 
 console = Console()
 config = ConfigParser(comment_prefixes="#", delimiters="=")
-config.read("config/main.ini")
+config.read("data/config/main.ini")
 
 # Color codes:
 def warn(stri):
@@ -35,7 +35,8 @@ console.print(f"[ [bold][bright_green]OK[/] ][italic] boxEngine is loaded![/]")
 class boxEngine:
 
     def box(string):
-        from git import Repo        
+        from git import Repo
+        repo = Repo()     
 
     def rok():
         return "Exit status:", 0
@@ -70,7 +71,7 @@ class boxEngine:
                 print(f"New cvar value is:{ce}")
 
     def vars():
-        config.read("config/vars.ini")
+        config.read("data/config/vars.ini")
         try:
             readVars = str(config.items("VARS"))
             print("Current vars are:")

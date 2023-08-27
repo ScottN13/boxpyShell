@@ -11,7 +11,7 @@ console = Console()
 printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
 config = ConfigParser(comment_prefixes="#", delimiters="=")
-config.read("config/main.ini")
+config.read("data/config/main.ini")
 
 # check if debug mode is on:
 try:

@@ -19,7 +19,7 @@ class logins:
         bypassLogin = False
         # read how many users exist.
         try:
-            config.read("config/users.ini")
+            config.read("data/config/users.ini")
             userList = config.sections()
             usercount = 0
             for i in userList: # count how many users.
@@ -39,7 +39,7 @@ class logins:
 
         # permissions check
         try: 
-            config.read("config/main.ini")
+            config.read("data/config/main.ini")
             login_cnf = str(config["DEBUG"]["skipUsers"])
             if login_cnf == "false":
                 bypassLogin = False # will prompt to login as any user besides root.
@@ -50,7 +50,7 @@ class logins:
             console.print_exception(f"[bold][bright_red][Error!] Config file or an element is missing! -> {Err}")
 
         
-        config.read("config/users.ini")
+        config.read("data/config/users.ini")
         tries = 3
         if bypassLogin == False:
             for i in range(0, tries)[::-1]:
