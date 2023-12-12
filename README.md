@@ -8,7 +8,7 @@
 boxpyShell is a shell i made.
 It has both CLI and GUI thats mostly broken.
 it has the ability to run user made programs (scripts), read files, and more.
-This work is licensed under the GNU GPL v3 License. Made by ValkTheBoxman and Gusic06
+This work is licensed under the GNU GPL v3 License. Made by ScottN13 and Gusic06
 
 # CLI
 Every command is CaSe SeNsItIvE!
