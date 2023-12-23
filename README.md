@@ -8,7 +8,9 @@
 ![maintained - yes](https://img.shields.io/badge/maintained-yes-blue) [![Made with Python](https://img.shields.io/badge/Python->=3.6-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage") 
 
 boxpyShell is a shell i made.
-It has both CLI and GUI (as of update 1.5.2022 (the .5 is the build, i lost count)).
+It has both CLI and GUI thats mostly broken.
+it has the ability to run user made programs (scripts), read files, and more.
+This work is licensed under the GNU GPL v3 License. Made by ScottN13 and Gusic06
 
 # CLI
 Every command is CaSe SeNsItIvE!
@@ -23,6 +25,7 @@ Print Hello World! and tell (bad) jokes!
 
 # Installation
 You can use the latest release (dev or release build) [there is none at the moment]
+Don't have all the modules? Run the installer.py script. From there, after it's done, you will enter the updater.
 
 ## Installers
 Default Windows installers.

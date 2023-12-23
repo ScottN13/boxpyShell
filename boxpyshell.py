@@ -4,84 +4,118 @@ import re as regex
 import sys
 import time
 import os
-from extShellData import *
-from nbdpy import *
-# from userLogon import *
+from boxEngine import *
+from rich.console import Console
+from userLogon import logins
 
+console = Console()
 printStuffPc, printStuff, run = True, True, True
 OSNAME = os.getlogin()
-config = ConfigParser()
-config.read("config/main.ini")
+config = ConfigParser(comment_prefixes="#", delimiters="=")
+config.read("data/config/main.ini")
 
+# check if debug mode is on:
+try:
+    debug_check = str(config["DEBUG"]["isActive"])
+    if debug_check == "false":
+        debugMode = False
+    elif debug_check == "true":
+        console.print(f"["+"[bold][bright_yellow] WARN [/]"+"] Debug mode is on!")
+        debugMode = True    
+
+except Exception as Err:
+    boxEngine.error.ConfigFatal(Err)
+
+# check if the config for the animation lib has changed.
 try:
     config_data1 = str(config["DEBUG"]["noloading"])
-    print(config_data1)
     if config_data1 == "false":
         animlib.loadingAnim("load",5)
     elif config_data1 == "true":
-        print("skipped animlib")
-        debugMode = True
+        console.print(f"["+"[bold][bright_green] OK [/]"+"]"+"[italic][bold][bright_red] DEBUG:[/]"+" loading animation skipped!")
 
 except Exception as Err:
-    exit(f"Error! Config file or an element is missing! -> {Err}")
+    boxEngine.error.ConfigFatal(Err)
 
-while run is True:
+logins.doLogin() # Make a login. Is bypassed if skipLogin is true.
 
-    """
-    def pyclockInit():
-       # from pyclock import *
-        if printStuffpc == True:
-            print("init pyclock-library")
-            print("hpc for a list of  commands")
-            print("!!!WARRNINGG!!! This version of pyclock is 0.4 experimental and has some bugs with the events class!")
-            print("Learn more on the pull request i made on github. You can get the links by putting 'source' on the main menu terminal")
-            printStuffpc = False
-        print("please type a command.")
-     
-    def passgenInit():
-        #from passgen import *
-        print("init pypassgen")
-        print("hpg for a list of commands")
-
-    """ 
-
+while run is True: # Main Loop
+    
     if printStuff is True:
+        warn("This version of boxpyshell is still in beta! There might be new releases on github!")
         print("Hello There!, Type 'help' for a list of avaiable commands")
         printStuff = False
-    print("Please type a command.")
+        print("Please type a command.")
 
 
-    command = input(f"boxpyshell@{OSNAME} $~: ")
+    command = console.input(f"[bold][bright_yellow]boxpyshell[/][bright_magenta]@[/][bright_green]{OSNAME}$~:[/] ") # OSNAME = Host name.
 
-    if command == "help":
+    if command == "help": # Help is read in /data/ for easier code readability.
         print("Select which type of help to display: basic, ext1, ext2")
-        typeHelp = input(" -> ").lowercase()
+        typeHelp = input(" -> ")
 
         if typeHelp == "basic":
-            with open('data/help.txt') as file:
+            with open('data/txt/help.txt') as file:
                 print(file.read())
 
         elif typeHelp == "ext1":
-            with open('data/hpc.txt') as file:
+            with open('data/txt/hpc.txt') as file:
                 print(file.read())
 
         elif typeHelp == "ext2":
-            with open('data/hpg.txt') as file:
+            with open('data/txt/hpg.txt') as file:
                 print(file.read())
 
         continue
 
-    elif command == "readEX":
+    elif command == "readEX": # Just what the first print() says. sauce is in /data/
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
         animlib.loadingAnim("load", 2)
-        spamClear()
-        with open('data/helloworld.txt') as file:
+        boxEngine.clear()
+        with open('data/txt/helloworld.txt') as file:
             print(file.read())           
 
     elif command == "source":
-        with open("data/source.txt") as file:
+        with open("data/txt/source.txt") as file:
             print(file.read())
+
+    elif command == "cvar": # Common variable
+        boxEngine.cvar()
+
+    elif command == "vars": # Variables stored in /config/vars.ini
+        boxEngine.vars()
+
+    elif command == "rmdir": # gnu :4khdtroll:
+        path = input("Path to remove directory: ")
+        boxEngine.rmdir(path)
+    
+    elif command == "mkdir":
+        name = input("Give a name for the new directory: ")
+        if name == None or name == "":
+            error("You cannot choose an empty name.")
+        else:
+            boxEngine.mkdir(name)
+
+    elif command == "pcinfo":
+        ...
+
+    elif command == "config":
+        warn("You are changing the main.ini configuartion file. Please be warned that any typo can break boxpyshell!")
+        uInput = console.input("[bold]What would block you like to change?")
+        uIBlocks = ["main","debug","ext","external","m","d","e"] # List of commands, full (external), inital letters (e), shortened (ext)
+
+        if uInput != uIBlocks: # spell check
+            error(f"No such thing as {uInput}! Run the command again.")
+
+        elif uInput == "main" or uInput == "m": # edit main
+            boxEngine.error.NotImplement()
+
+        elif uInput == "ext" or uInput == "external" or uInput == "e": # edit ext
+            boxEngine.error.NotImplement()
+
+        elif uInput == "debug" or uInput == "d":
+            boxEngine.error.NotImplement()
 
     elif command == "screenCreate":
         print("Please input a command")
@@ -89,7 +123,7 @@ while run is True:
         if cmmd == "createScreen1":
             pythonBasic.screens.createScreen()
             
-    elif command == "addScript":
+    elif command == "addScript": # Only gusic knows wtf is going in there.
         main = RemoteScriptBuilder()
         main.run()
 
@@ -100,9 +134,9 @@ while run is True:
         
         print(echo_string)
         
-    elif command in ("?", "!"): #Command Flags for executing code
+    if command[:1] in ("?", "!"): #Command Flags for executing code
         try:
-            exec(command[1:]) # Splitting the command flag from the string so we can run it
+            exec(f"{command[1:]}") # Splitting the command flag from the string so we can run it
         except Exception as Err:
             print(f"Couldn't run code (Error Received) -> {Err}")
     
@@ -127,45 +161,57 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
                         print("PermissionError: Couldn't run file0.py")
                 if command[2] == "" and command[3] == "":
                     os.system(f"python {command[1]}")
-                    os.system(f"python {command[1]}")
+                    os.system(f"python {command[1]}") #  WHAT THE FUCK IS GOING ON
         except IndexError:
             print("Invalid params for build command")
         command = " ".join(command, 4)
 
-    elif command == "clearscreen":
-        spamClear()
+    elif command == "clearscreen" or command == "clear":
+        boxEngine.clear()
     
     elif command == "shellVer":
-        extFunc.funct.shellVer()
+        boxEngine.extFunc.funct.shellVer()
         
     elif command == "MathAdd":
-        extFunc.math.add()
+        boxEngine.extFunc.math.add()
 
     elif command == "MathSubt":
-        extFunc.math.subtract()
+        boxEngine.extFunc.math.subtract()
     
     elif command == "helloMe":
-        extFunc.fun.helloUser()
+        boxEngine.extFunc.fun.helloUser()
 
     elif command == "8Ball":
-        extFunc.fun.eightBall()
+        boxEngine.extFunc.fun.eightBall()
 
     elif command == "YesOrNo":
-        extFunc.fun.ynGame()
+        boxEngine.extFunc.fun.ynGame()
 
-    elif command == "nbdpy":
-        nbDisplay.startDisplay()
-
-    elif command == "MegaExit":
+    elif command == "me":
         sys.exit("M E G A E X I T")
 
+    elif command == "testcolor":
+        warn("test")
+        error("test")
+        success('test')
+
+    elif command == "logout":
+        logins.logout()
+
+    elif command == "license":
+            with open('LICENSE.txt') as file:
+                print(file.read())
+
     elif command == "createFile":
-        command = command.split(" ", 2)
-        file = command[1]
-        file_extension = ".txt" if file[-5:] not in (".txt", ".py", ".c", ".rc", ".java") else ""
-        with open(f"{file}{file_extension}", "w") as file:
-            file.write("") # Writing nothing to the file so we can just create an empty file
-        command = " ".join(command, 2)
+        try:
+            command = command.split(" ", 2)
+            file = command[1]
+            file_extension = ".txt" if file[-5:] not in (".txt", ".py", ".c", ".rc", ".java") else "" # Basically if the final 5 characters in the user string are not in the tuple, then file_extension = "" as command[1] will already have a file_extension
+            with open(f"{file}{file_extension}", "w") as file:
+                file.write("") # Writing nothing to the file so we can just create an empty file
+            command = " ".join(command, 2)
+        except Exception as Err: # If we get an index error, we know that the user most likely hasn't specified a filename
+            print(f"Please specify a filename!") if type(Err) == IndexError else print(f"CreateFileError: {Err}") # Printing first statement if Err is an index error, else we print the other statement
 
     elif command in ("quit", "exit"):
         animlib.loadingAnim("exit", 5)
