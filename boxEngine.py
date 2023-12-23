@@ -11,11 +11,11 @@ config = ConfigParser(comment_prefixes="#", delimiters="=")
 config.read("data/config/main.ini")
 
 # Color codes:
-def warn(stri):
+def warn(stri: str):
     console.print(f"[bold][bright_yellow]█ Warning! -> {stri}[/]")
-def error(stri):
+def error(stri: str):
     console.print(f"[bold][bright_red]█ Error! -> {stri}[/]")
-def success(stri):
+def success(stri: str):
     console.print(f"[bold][bright_green]█ Success! -> {stri}[/]")
 
 try:
@@ -50,12 +50,14 @@ class boxEngine:
     def mkdir(name: str):
         os.mkdir(name)
 
-    def spamClear():
-        for i in range(100):
-            print("")
+    def clear():
+        if os.name() == 'nt':
+            os.system("cls")
+        else:
+            os.system("clear")
 
     def cvar(): # this one wont write.
-        with open('data/txt/cvar.txt') as file:
+        with open('data/txt/cvar.txt', mode="w+") as file:
             print(f"cvar value = {file.read()}")
             lines = file.readlines()
 
@@ -99,11 +101,9 @@ class boxEngine:
             error("User not found.")
 
     class funct:
-        def echo(x):
-            print(x)
+        def echo(x): print(x)
         
-        def shellVer():          
-            print(f"boxpyshell created by ValkTheBoxman\nver: {ver} Build: main\n（＾ω＾）\n")
+        def shellVer(): print(f"boxpyshell created by ValkTheBoxman\nver: {ver} Build: main\n（＾ω＾）\n")
 
 
     class pc:

@@ -71,7 +71,7 @@ while run is True: # Main Loop
         print('This is just a demonstration of the reading ability of boxpyshell')
         print("Please wait...")
         animlib.loadingAnim("load", 2)
-        boxEngine.spamClear()
+        boxEngine.clear()
         with open('data/txt/helloworld.txt') as file:
             print(file.read())           
 
@@ -181,7 +181,7 @@ PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
         command = " ".join(command, 4)
 
     elif command == "clearscreen" or command == "clear":
-        boxEngine.spamClear()
+        boxEngine.clear()
     
     elif command == "shellVer":
         boxEngine.extFunc.funct.shellVer()
