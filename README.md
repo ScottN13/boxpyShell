@@ -22,7 +22,4 @@ Don't have all the modules? Run the installer.py script. From there, after it's 
 Default Windows installers.
 
 # Future plans/updates:
-There will be a release for the TI-84+ CE Python and the TI-NSPIRE calculators (might be very limited in terms of libraries!!)
-Available for more platforms like MacOS and Linux
-
-....package manager??
+Package manager and Unix support.
