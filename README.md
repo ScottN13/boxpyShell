@@ -1,4 +1,6 @@
-# boxpyShell
+# boxpyShell (bps)
+# Please note that main branch hasn't been updated in months.
+# Use dev!
 
 ![icon](https://user-images.githubusercontent.com/87974560/181935433-bb9da056-c1f6-4beb-b676-5708c821be67.png)
 

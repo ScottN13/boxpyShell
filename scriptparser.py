@@ -39,6 +39,14 @@ class RemoteScriptBuilder:
                     return self.contents
         else:
             raise Exception(f"Couldn't find {name} on this device..")
+            
+            
+    def add_command_to_main_file(self, command_name, script_name, function_name):
+        with open(".\\boxpyshell.py", "r") as file:
+            _contents = file.read()
+        new_contents = f"import {script_name}\n{_contents}\nelif command == '{command_name}':\n    {function_name}({*args}, {**kwargs})"
+        with open(".\\boxpyshell.py", "w") as file:
+            file.write(new_contents)
         
      
     def add_file_to_list(self, name) -> None:
@@ -67,7 +75,8 @@ class RemoteScriptBuilder:
         
         
     def run(self) -> None:
-        self.build_file(input("What do you wamt to name your script? -> "))
+        self.build_file(input("What do you want to name your script? -> "))
+        self.add_command_to_main_file(input("Name of command? -> "), input("Name of source file? -> "), input("Name of function to be run? -> "))
         
         
 if __name__ == "__main__":

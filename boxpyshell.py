@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 from scriptparser import RemoteScriptBuilder
+import re as regex
 import sys
 import time
 import os
@@ -126,28 +127,12 @@ while run is True: # Main Loop
         main = RemoteScriptBuilder()
         main.run()
 
-    elif command == "echo": # i need to switch to regex
-        txtE = input("Type something to echo: ")
-        for i in range(5):
-            print("")
-        boxEngine.funct.echo(txtE)
-        ##########################
-        #You could also do:
-        #
-        #import re as regex
-        #
-        #find_echo_string = regex.search('"', command)
-        #index_of_string = find_echo_string.span()
-        #echo_string = command[index_of_string[1]:-1:1] # -> Slicing from the start of the string to the end of the string to get the contents
-        #
-        #print(echo_string)
-        #
-        #So if my input was -> echo "Hello World!"
-        #it would return with just -> Hello World!
-        #
-        #this just makes the command more immediate
-
-        # ok, but i have no experience in regex -es -- valko
+    elif command == "echo":        
+        find_echo_string = regex.search('"', command)
+        index_of_string = find_echo_string.span()
+        echo_string = command[index_of_string[1]:-1:1] # -> Slicing from the start of the string to the end of the string to get the contents
+        
+        print(echo_string)
         
     if command[:1] in ("?", "!"): #Command Flags for executing code
         try:
@@ -166,6 +151,7 @@ try:
     import PyInstaller.__main__
 except ModuleNotFoundError:
     subprocess.call(['python', '-m', 'pip', 'install', 'pyinstaller'])
+    import PyInstaller.__main__
 PyInstaller.__main__.run(['{command[1]}','--onefile'])""")
                     try:
                         os.system("python file0.py")
